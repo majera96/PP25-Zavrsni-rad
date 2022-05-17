@@ -33,14 +33,9 @@ create table lokacija(
     naziv_ulice varchar(50),
     broj_ulice varchar(10),
     postanski_broj char(5),
-    grad varchar(30)
-);
-
-create table kontakt(
-    sifra int not null primary key auto_increment,
-    broj_mobitela varchar(11),
-    email varchar(100),
-    lokacija int not null
+    grad varchar(30),
+    broj_mobitela varchar(20),
+    email varchar(100)
 );
 
 create table korisnik(
@@ -56,8 +51,5 @@ create table korisnik(
 );
 
 alter table rezervacija add foreign key (vozilo) references vozilo(sifra);
-alter table lokacija add foreign key (rezervacija) references rezervacija(sifra);
-alter table kontakt add foreign key (lokacija) references lokacija(sifra);
-alter table korisnik add foreign key (rezervacija) references rezervacija(sifra);
-
-// ERROR 1146 (42S02) at line 59: Table 'rentacar.lokcija' doesn't exist
+alter table rezervacija add foreign key (korisnik) references korisnik(sifra);
+alter table rezervacija add foreign key (lokacija) references lokacija(sifra);
