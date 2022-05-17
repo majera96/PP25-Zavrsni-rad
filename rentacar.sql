@@ -24,7 +24,8 @@ create table rezervacija(
     lokacija int not null,
     datum_preuzimanja datetime,
     datum_povratka datetime,
-    korisnik int not null
+    korisnik int not null,
+    osiguranje boolean
 );
 
 create table lokacija(
@@ -50,13 +51,12 @@ create table korisnik(
     broj_mobitela varchar(20),
     ime_ulice varchar(100),
     grad varchar(50),
-    drzava varchar(30),
-    osiguranje boolean
+    drzava varchar(30)
 
 );
 
 alter table rezervacija add foreign key (vozilo) references vozilo(sifra);
-alter table lokcija add foreign key (rezervacija) references rezervacija(sifra);
+alter table lokacija add foreign key (rezervacija) references rezervacija(sifra);
 alter table kontakt add foreign key (lokacija) references lokacija(sifra);
 alter table korisnik add foreign key (rezervacija) references rezervacija(sifra);
 
