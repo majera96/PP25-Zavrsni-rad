@@ -13,8 +13,7 @@ create table vozilo(
     godiste datetime,
     gorivo varchar(30),
     mjenjac varchar(20),
-    potrosnja decimal(18,2),
-    motor varchar(10)
+    opisvozila text
 );
 
 create table rezervacija(
@@ -50,6 +49,12 @@ create table korisnik(
 
 );
 
+create table slikavozila(
+    sifra int not null primary key auto_increment,
+    vozilo int not null
+);
+
 alter table rezervacija add foreign key (vozilo) references vozilo(sifra);
 alter table rezervacija add foreign key (korisnik) references korisnik(sifra);
 alter table rezervacija add foreign key (lokacija) references lokacija(sifra);
+alter table slikavozila add foreign key (vozilo) references vozilo(sifra);
