@@ -52,7 +52,8 @@ create table korisnik(
 create table slikavozila(
     sifra int not null primary key auto_increment,
     opisslike varchar(50) not null,
-    vozilo int not null
+    vozilo int not null,
+    putanja int not null
 );
 
 alter table rezervacija add foreign key (vozilo) references vozilo(sifra);
