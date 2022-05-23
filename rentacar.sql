@@ -59,3 +59,52 @@ alter table rezervacija add foreign key (vozilo) references vozilo(sifra);
 alter table rezervacija add foreign key (korisnik) references korisnik(sifra);
 alter table rezervacija add foreign key (lokacija) references lokacija(sifra);
 alter table slikavozila add foreign key (vozilo) references vozilo(sifra);
+
+# Lokacije poslovnica rent-a-cara
+insert into lokacija (sifra,naziv_ulice,broj_ulice,postanski_broj,grad,broj_mobitela,email)
+values (null,'Franje Kuhača','26c',31400,'Đakovo',0955218170,'majerdjakovo@rentacar.com'),
+ (null,'Ul.Lorenza Jagera','5',31000,'Osijek',0998743213,'majerosijek@rentacar.com');
+
+
+# 1. Gradska vozila > planiram dodati kategorije pa podjeliti vozila na njih
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
+values (null,'Ford','Fiesta','2021-05-24','benzin','automatik','uskoro'),
+(null,'Volkswages','Up','2022-01-19','dizel','automatik','opis'),
+(null,'Renault','Twingo','2022-05-01','dizel','automatik','uskoro'),
+(null,'Peugeot','108','2020-12-20','dizel','automatik','uskoro'),
+(null,'Hyundai','i10','2019-03-22','hybrid','automatik','uskoro'),
+(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin','automatik','uskoro'),
+(null,'Mazda','2','2018-07-05','dizel','Manual','uskoro');
+
+# 2. Limuzine
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
+values (null,'Škoda','Octavia','2021-09-11','dizel','Manual','uskoro'),
+(null,'Škoda','Octavia','2022-03-12','dizel','Automatik','uskoro'),
+(null,'Volkswagen','Passat','2020-05-21','dizel','Automatski','uskoro'),
+(null,'Volkswages','Passat','2022-01-30','dizel','Manual','uskoro'),
+(null,'Renault','Talisman','2020-04-10','benzin','Manual','uskoro'),
+(null,'Audi','A4','2018-07-07','dizel','Automatik','uskoro');
+
+# 3. Cargo
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
+values (null,'Volkswages','Caddy','2017-12-21','dizel','Manul','Uskoro'),
+(null,'Volkswages','Crafter Furgon','2020-10-11','dizel','Manul','Uskoro');
+
+# 4. Luksuzna
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
+values (null,'Audi','A6 50TDI Quattro','2021-12-19','dizel','Automatik','Uskoro'),
+(null,'Audi','A5 50TDI Quattro','2020-06-11','dizel','Automatik','Uskoro'),
+(null,'BMW','750 xDrive','2022-06-13','dizel','Automatik','Uskoro');
+
+# 5. Karavan
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
+values (null,'Renault','Clio Grandtour','2019-09-14','dizel','Manual','Uskoro'),
+(null,'Škoda','Octavia Combi','2018-02-27','benzin','Manual','Uskoro');
+
+# 6. SUV
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
+values (null,'Volkswagen','Tiguan','2021-03-15','dizel','Automatik','Uskoro'),
+(null,'Škoda','Kodiaq','2019-03-17','benzin','Manual','Uskoro');
+
+
+
