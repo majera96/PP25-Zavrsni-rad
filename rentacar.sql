@@ -106,5 +106,11 @@ insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
 values (null,'Volkswagen','Tiguan','2021-03-15','dizel','Automatik','Uskoro'),
 (null,'Škoda','Kodiaq','2019-03-17','benzin','Manual','Uskoro');
 
-
+insert into korisnik(sifra,ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava)
+values (null,'Martina','Ivankovič','martinai@gmail.com','385912348796','Osječka ulica 78','Osijek','Hrvatska'),
+(null,'James','Knowille','knowille@yhotmail.com','07084421483','Amber hill 17b','London','Engleska'),
+(null,'Lukas','Mayer','lukasmayer@gmail.com','06431849780','Maffie platz 13','Stuttgart','Njemačka'),
+(null,'Luka','Lukić','lukalukić@gmail.com','0955874369','Kralja Tomislava 99a','Zagreb','Hrvatska'),
+(null,'Ivan','Ivanović','ivanovic@gmail.com','0998563478','Franje Kuhača 26c','Đakovo','Hrvatska'),
+(null,'Tara','Reić','tarareic@gmail.com','0987532687','Put brodarica 95','Split','Hrvatska');
 
