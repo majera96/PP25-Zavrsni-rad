@@ -62,19 +62,22 @@ alter table slikavozila add foreign key (vozilo) references vozilo(sifra);
 
 # Lokacije poslovnica rent-a-cara
 insert into lokacija (sifra,naziv_ulice,broj_ulice,postanski_broj,grad,broj_mobitela,email)
-values (null,'Franje Kuhača','26c',31400,'Đakovo',0955218170,'majerdjakovo@rentacar.com'),
- (null,'Ul.Lorenza Jagera','5',31000,'Osijek',0998743213,'majerosijek@rentacar.com');
+values (null,'Ul.Franje Kuhača','26c',31400,'Đakovo',0955551111,'rentacardj@rentacar.com'),
+    (null,'Vukovarska ulica','67',31207,'Klisa',0955551112,'rentacaros@rentacar.com'),
+    (null,'Valtursko polje','210',52100,'Pula',0955551113,'rentacarpu@rentacar.com'),
+    (null,'Ul. Rudolfa Fizira','21',10150,'Zagreb',0955551114,'rentacarzg@rentacar.com'),
+    (null,'Cesta Dr. Franje Tuđmana','1270',21217,'Kaštel Štafilić',0955551115,'rentacarst@rentacar.com');
 
 
 # 1. Gradska vozila > planiram dodati kategorije pa podjeliti vozila na njih
 insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
-values (null,'Ford','Fiesta','2021-05-24','benzin','automatik','uskoro'),
-(null,'Volkswages','Up','2022-01-19','dizel','automatik','opis'),
-(null,'Renault','Twingo','2022-05-01','dizel','automatik','uskoro'),
-(null,'Peugeot','108','2020-12-20','dizel','automatik','uskoro'),
-(null,'Hyundai','i10','2019-03-22','hybrid','automatik','uskoro'),
-(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin','automatik','uskoro'),
-(null,'Mazda','2','2018-07-05','dizel','Manual','uskoro');
+values (null,'Ford','Fiesta','2021-05-24','benzin','automatik','Vozi se lako i zabavno,a blago dorađeni i uglađeni upravljački mehanizam čini gradsku vožnju još ugodnijom. Dolazi sa troja vrata, četiri sjedala. Od dodatne opreme posjeduje klima uređaj,bluetooth te USB. U prtljažnik stanu 2 kofera.'),
+(null,'Volkswages','Up','2022-01-19','dizel','automatik','Nudi visoke standarde u svim ključnim područjima. Mnogo je sofisticiraniji nego što njegova mala karoserija sugerira, a nudi praktičnost, dobar izgled i zabavno iskustvo vožnje u malom paketu. Dolazi sa troja vrata, četiri sjedala. Od dodatne opreme posjeduje navigaciju,klima uređaj,bluetooth te USB. U prtljažnik stanu 2 kofera.'),
+(null,'Renault','Twingo','2022-05-01','dizel','automatik','Uvijek je slovio za mali šarmantni automobil kojim se lako kretati po gradskim gužvama, a osobito je bio omiljen među ženama. Novi model je moderan, pruža bolju upravljivost, više prostora u unutrašnjosti. Dolazi sa troja vrata, četiri sjedala. Od dodatne opreme posjeduje multimediju,navigaciju,klima uređaj te bluetooth. U prtljažnik stanu 2 kofera'),
+(null,'Peugeot','108','2020-12-20','dizel','automatik','Kompaktan i elegantan mali automobil s pet vrata krasi visoka tehnološka opremljenost, a pruža iskustvo lakoće upravljanja gradskim uličicama. Od dodatne opreme posjeduje multimediju,navigaciju,klima uređaj te bluetooth. U prtljažnik stanu 2 kofera'),
+(null,'Hyundai','i10','2019-03-22','hybrid','automatik','Moderan i profinjen dizajn krije prostranu kabinu, a tu je i najveći prtljažnik u klasi. Dolazi sa troja vrata, četiri sjedala. Od dodatne opreme posjeduje multimediju,navigaciju,klima uređaj te bluetooth. U prtljažnik stanu 2 kofera'),
+(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin','automatik','Ističe se zbog odličnog iskustva vožnje koje pruža te mnogo tehnoloških rješenja. Kvaliteta izrade je neupitna, čemu svjedoči njegova učestalost na ulicama. Dolazi sa troja vrata, dva sjedala. Od dodatne opreme posjeduje klima uređaj, USB.'),
+(null,'Mazda','2','2018-07-05','dizel','Manual','Zahvaljujući privlačnome dizajnu, praktičnosti i iskustvu vožnje, Mazda 2 je ozbiljan suparnik svim kandidatima u svojoj klasi. Dolazi sa petora vrata, četiri sjedala. Od dodatne opreme posjeduje multimediju,navigaciju,klima uređaj te bluetooth. U prtljažnik stanu 2 kofera');
 
 # 2. Limuzine
 insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
@@ -106,6 +109,8 @@ insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
 values (null,'Volkswagen','Tiguan','2021-03-15','dizel','Automatik','Uskoro'),
 (null,'Škoda','Kodiaq','2019-03-17','benzin','Manual','Uskoro');
 
+
+#Unos korisnika
 insert into korisnik(sifra,ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava)
 values (null,'Martina','Ivankovič','martinai@gmail.com','385912348796','Osječka ulica 78','Osijek','Hrvatska'),
 (null,'James','Knowille','knowille@yhotmail.com','07084421483','Amber hill 17b','London','Engleska'),
@@ -113,4 +118,13 @@ values (null,'Martina','Ivankovič','martinai@gmail.com','385912348796','Osječk
 (null,'Luka','Lukić','lukalukić@gmail.com','0955874369','Kralja Tomislava 99a','Zagreb','Hrvatska'),
 (null,'Ivan','Ivanović','ivanovic@gmail.com','0998563478','Franje Kuhača 26c','Đakovo','Hrvatska'),
 (null,'Tara','Reić','tarareic@gmail.com','0987532687','Put brodarica 95','Split','Hrvatska');
+
+#Unos rezervacija
+insert into rezervacija (sifra,vozilo,cijena,lokacija,datum_preuzimanja,datum_povratka,korisnik,osiguranje)
+values (null,5,1150,4,'2022-05-02','2022-05-05',1,true),
+(null,13,2100,1,'2022-03-12','2022-03-16',3,true), 
+(null,18,28900,3,'2021-12-15','2022-1-15',2,true),
+(null,1,350,2,'2022-04-04','2022-04-05',4,false),
+(null,22,5500,4,'2022-05-22','2022-05-26',5,true),
+(null,12,11000,2,'2022-01-02','2022-01-10',6,true);
 
