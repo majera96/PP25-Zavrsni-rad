@@ -127,3 +127,18 @@ values (null,5,1150.00,4,'2022-05-02','2022-05-05',1,true),
 (null,22,5500.00,4,'2022-05-22','2022-05-26',5,true),
 (null,12,11000.00,2,'2022-01-02','2022-01-10',6,true);
 
+#Prikazati imena i prezimena korisnika te proizvodača i modela vozila koja su rezervirali
+select a.ime,a.prezime,b.vozilo,c.proizvodac,c.model
+from korisnik a inner join rezervacija b 
+on a.sifra = b.korisnik
+inner join vozilo c 
+on b.vozilo = c.sifra;
+
+#Prikaz iznosa dnevne zarade ukoliko su sva vozila iznajmljena u jednom danu
+#Iznos: 49.000
+select sum(cijena) from rezervacija;
+
+
+
+
+
