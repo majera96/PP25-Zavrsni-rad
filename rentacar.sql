@@ -12,9 +12,8 @@ create table vozilo(
     model varchar(30),
     godiste datetime,
     gorivo varchar(30),
-    mjenjac varchar(20),
-    opisvozila text
-);
+    mjenjac varchar(20)
+    );
 
 create table rezervacija(
     sifra int not null primary key auto_increment,
@@ -70,44 +69,44 @@ values (null,'Ul.Franje Kuhača','26c',31400,'Đakovo',0955551111,'rentacardj@re
 
 
 # 1. Gradska vozila > planiram dodati kategorije pa podjeliti vozila na njih
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
-values (null,'Ford','Fiesta','2021-05-24','benzin','automatik','Vozi se lako i zabavno,a blago dorađeni i uglađeni upravljački mehanizam čini gradsku vožnju još ugodnijom. Dolazi sa troja vrata, četiri sjedala. Od dodatne opreme posjeduje klima uređaj,bluetooth te USB. U prtljažnik stanu 2 kofera.'),
-(null,'Volkswages','Up','2022-01-19','dizel','automatik','Nudi visoke standarde u svim ključnim područjima. Mnogo je sofisticiraniji nego što njegova mala karoserija sugerira, a nudi praktičnost, dobar izgled i zabavno iskustvo vožnje u malom paketu. Dolazi sa troja vrata, četiri sjedala. Od dodatne opreme posjeduje navigaciju,klima uređaj,bluetooth te USB. U prtljažnik stanu 2 kofera.'),
-(null,'Renault','Twingo','2022-05-01','dizel','automatik','Uvijek je slovio za mali šarmantni automobil kojim se lako kretati po gradskim gužvama, a osobito je bio omiljen među ženama. Novi model je moderan, pruža bolju upravljivost, više prostora u unutrašnjosti. Dolazi sa troja vrata, četiri sjedala. Od dodatne opreme posjeduje multimediju,navigaciju,klima uređaj te bluetooth. U prtljažnik stanu 2 kofera'),
-(null,'Peugeot','108','2020-12-20','dizel','automatik','Kompaktan i elegantan mali automobil s pet vrata krasi visoka tehnološka opremljenost, a pruža iskustvo lakoće upravljanja gradskim uličicama. Od dodatne opreme posjeduje multimediju,navigaciju,klima uređaj te bluetooth. U prtljažnik stanu 2 kofera'),
-(null,'Hyundai','i10','2019-03-22','hybrid','automatik','Moderan i profinjen dizajn krije prostranu kabinu, a tu je i najveći prtljažnik u klasi. Dolazi sa troja vrata, četiri sjedala. Od dodatne opreme posjeduje multimediju,navigaciju,klima uređaj te bluetooth. U prtljažnik stanu 2 kofera'),
-(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin','automatik','Ističe se zbog odličnog iskustva vožnje koje pruža te mnogo tehnoloških rješenja. Kvaliteta izrade je neupitna, čemu svjedoči njegova učestalost na ulicama. Dolazi sa troja vrata, dva sjedala. Od dodatne opreme posjeduje klima uređaj, USB.'),
-(null,'Mazda','2','2018-07-05','dizel','Manual','Zahvaljujući privlačnome dizajnu, praktičnosti i iskustvu vožnje, Mazda 2 je ozbiljan suparnik svim kandidatima u svojoj klasi. Dolazi sa petora vrata, četiri sjedala. Od dodatne opreme posjeduje multimediju,navigaciju,klima uređaj te bluetooth. U prtljažnik stanu 2 kofera');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
+values (null,'Ford','Fiesta','2021-05-24','benzin','automatik'),
+(null,'Volkswages','Up','2022-01-19','dizel','automatik'),
+(null,'Renault','Twingo','2022-05-01','dizel','automatik'),
+(null,'Peugeot','108','2020-12-20','dizel','automatik'),
+(null,'Hyundai','i10','2019-03-22','hybrid','automatik'),
+(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin'),
+(null,'Mazda','2','2018-07-05','dizel','Manual');
 
 # 2. Limuzine
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
-values (null,'Škoda','Octavia','2021-09-11','dizel','Manual','uskoro'),
-(null,'Škoda','Octavia','2022-03-12','dizel','Automatik','uskoro'),
-(null,'Volkswagen','Passat','2020-05-21','dizel','Automatski','uskoro'),
-(null,'Volkswages','Passat','2022-01-30','dizel','Manual','uskoro'),
-(null,'Renault','Talisman','2020-04-10','benzin','Manual','uskoro'),
-(null,'Audi','A4','2018-07-07','dizel','Automatik','uskoro');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
+values (null,'Škoda','Octavia','2021-09-11','dizel','Manual'),
+(null,'Škoda','Octavia','2022-03-12','dizel','Automatik'),
+(null,'Volkswagen','Passat','2020-05-21','dizel','Automatski'),
+(null,'Volkswages','Passat','2022-01-30','dizel','Manual'),
+(null,'Renault','Talisman','2020-04-10','benzin','Manual'),
+(null,'Audi','A4','2018-07-07','dizel','Automatik');
 
 # 3. Cargo
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
-values (null,'Volkswages','Caddy','2017-12-21','dizel','Manul','Uskoro'),
-(null,'Volkswages','Crafter Furgon','2020-10-11','dizel','Manul','Uskoro');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
+values (null,'Volkswages','Caddy','2017-12-21','dizel','Manul'),
+(null,'Volkswages','Crafter Furgon','2020-10-11','dizel','Manul');
 
 # 4. Luksuzna
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
-values (null,'Audi','A6 50TDI Quattro','2021-12-19','dizel','Automatik','Uskoro'),
-(null,'Audi','A5 50TDI Quattro','2020-06-11','dizel','Automatik','Uskoro'),
-(null,'BMW','750 xDrive','2022-06-13','dizel','Automatik','Uskoro');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
+values (null,'Audi','A6 50TDI Quattro','2021-12-19','dizel','Automatik'),
+(null,'Audi','A5 50TDI Quattro','2020-06-11','dizel','Automatik'),
+(null,'BMW','750 xDrive','2022-06-13','dizel','Automatik');
 
 # 5. Karavan
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
-values (null,'Renault','Clio Grandtour','2019-09-14','dizel','Manual','Uskoro'),
-(null,'Škoda','Octavia Combi','2018-02-27','benzin','Manual','Uskoro');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
+values (null,'Renault','Clio Grandtour','2019-09-14','dizel','Manual'),
+(null,'Škoda','Octavia Combi','2018-02-27','benzin','Manual');
 
 # 6. SUV
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opisvozila)
-values (null,'Volkswagen','Tiguan','2021-03-15','dizel','Automatik','Uskoro'),
-(null,'Škoda','Kodiaq','2019-03-17','benzin','Manual','Uskoro');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
+values (null,'Volkswagen','Tiguan','2021-03-15','dizel','Automatik'),
+(null,'Škoda','Kodiaq','2019-03-17','benzin','Manual');
 
 
 #Unos korisnika
@@ -121,10 +120,10 @@ values (null,'Martina','Ivankovič','martinai@gmail.com','385912348796','Osječk
 
 #Unos rezervacija
 insert into rezervacija (sifra,vozilo,cijena,lokacija,datum_preuzimanja,datum_povratka,korisnik,osiguranje)
-values (null,5,1150,4,'2022-05-02','2022-05-05',1,true),
-(null,13,2100,1,'2022-03-12','2022-03-16',3,true), 
-(null,18,28900,3,'2021-12-15','2022-1-15',2,true),
-(null,1,350,2,'2022-04-04','2022-04-05',4,false),
-(null,22,5500,4,'2022-05-22','2022-05-26',5,true),
-(null,12,11000,2,'2022-01-02','2022-01-10',6,true);
+values (null,5,1150.00,4,'2022-05-02','2022-05-05',1,true),
+(null,13,2100.00,1,'2022-03-12','2022-03-16',3,true), 
+(null,18,28900.00,3,'2021-12-15','2022-1-15',2,true),
+(null,1,350.00,2,'2022-04-04','2022-04-05',4,false),
+(null,22,5500.00,4,'2022-05-22','2022-05-26',5,true),
+(null,12,11000.00,2,'2022-01-02','2022-01-10',6,true);
 
