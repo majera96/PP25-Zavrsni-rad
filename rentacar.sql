@@ -12,7 +12,9 @@ create table vozilo(
     model varchar(30),
     godiste datetime,
     gorivo varchar(30),
-    mjenjac varchar(20)
+    mjenjac varchar(20),
+    broj_vrata decimal(8,5),
+    maksimalni_broj_putnika decimal(8,5)
     );
 
 create table rezervacija(
@@ -44,8 +46,8 @@ create table korisnik(
     broj_mobitela varchar(20),
     ime_ulice varchar(100),
     grad varchar(50),
-    drzava varchar(30)
-
+    drzava varchar(30),
+    broj_vozacke decimal(18,9)
 );
 
 create table slikavozila(
@@ -69,54 +71,54 @@ values (null,'Ul.Franje Kuhača','26c',31400,'Đakovo',0955551111,'rentacardj@re
 
 
 # 1. Gradska vozila > planiram dodati kategorije pa podjeliti vozila na njih
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
-values (null,'Ford','Fiesta','2021-05-24','benzin','automatik'),
-(null,'Volkswages','Up','2022-01-19','dizel','automatik'),
-(null,'Renault','Twingo','2022-05-01','dizel','automatik'),
-(null,'Peugeot','108','2020-12-20','dizel','automatik'),
-(null,'Hyundai','i10','2019-03-22','hybrid','automatik'),
-(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin'),
-(null,'Mazda','2','2018-07-05','dizel','Manual');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
+values (null,'Ford','Fiesta','2021-05-24','benzin','automatik',3,2),
+(null,'Volkswages','Up','2022-01-19','dizel','automatik',3,2),
+(null,'Renault','Twingo','2022-05-01','dizel','automatik',5,4),
+(null,'Peugeot','108','2020-12-20','dizel','automatik',3,2),
+(null,'Hyundai','i10','2019-03-22','hybrid','automatik',3,2),
+(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin','manual',3,2),
+(null,'Mazda','2','2018-07-05','dizel','manual',3,2);
 
 # 2. Limuzine
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
-values (null,'Škoda','Octavia','2021-09-11','dizel','Manual'),
-(null,'Škoda','Octavia','2022-03-12','dizel','Automatik'),
-(null,'Volkswagen','Passat','2020-05-21','dizel','Automatski'),
-(null,'Volkswages','Passat','2022-01-30','dizel','Manual'),
-(null,'Renault','Talisman','2020-04-10','benzin','Manual'),
-(null,'Audi','A4','2018-07-07','dizel','Automatik');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
+values (null,'Škoda','Octavia','2021-09-11','dizel','manual',5,5),
+(null,'Škoda','Octavia','2022-03-12','dizel','automatik',5,5),
+(null,'Volkswagen','Passat','2020-05-21','dizel','automatik',5,5),
+(null,'Volkswages','Passat','2022-01-30','dizel','manual'5,5),
+(null,'Renault','Talisman','2020-04-10','benzin','manual',5,5),
+(null,'Audi','A4','2018-07-07','dizel','automatik'5,5);
 
 # 3. Cargo
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
-values (null,'Volkswages','Caddy','2017-12-21','dizel','Manul'),
-(null,'Volkswages','Crafter Furgon','2020-10-11','dizel','Manul');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
+values (null,'Volkswages','Caddy','2017-12-21','dizel','manul',3,3),
+(null,'Volkswages','Crafter Furgon','2020-10-11','dizel','manul',3,3);
 
 # 4. Luksuzna
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
-values (null,'Audi','A6 50TDI Quattro','2021-12-19','dizel','Automatik'),
-(null,'Audi','A5 50TDI Quattro','2020-06-11','dizel','Automatik'),
-(null,'BMW','750 xDrive','2022-06-13','dizel','Automatik');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
+values (null,'Audi','A6 50TDI Quattro','2021-12-19','dizel','automatik',5,5),
+(null,'Audi','A5 50TDI Quattro','2020-06-11','dizel','automatik',5,5),
+(null,'BMW','750 xDrive','2022-06-13','dizel','automatik',5,5);
 
 # 5. Karavan
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
-values (null,'Renault','Clio Grandtour','2019-09-14','dizel','Manual'),
-(null,'Škoda','Octavia Combi','2018-02-27','benzin','Manual');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
+values (null,'Renault','Clio Grandtour','2019-09-14','dizel','manual',5,5),
+(null,'Škoda','Octavia Combi','2018-02-27','benzin','manual'5,5);
 
 # 6. SUV
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac)
-values (null,'Volkswagen','Tiguan','2021-03-15','dizel','Automatik'),
-(null,'Škoda','Kodiaq','2019-03-17','benzin','Manual');
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
+values (null,'Volkswagen','Tiguan','2021-03-15','dizel','automatik',5,5),
+(null,'Škoda','Kodiaq','2019-03-17','benzin','manual',5,5);
 
 
 #Unos korisnika
-insert into korisnik(sifra,ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava)
-values (null,'Martina','Ivankovič','martinai@gmail.com','385912348796','Osječka ulica 78','Osijek','Hrvatska'),
-(null,'James','Knowille','knowille@yhotmail.com','07084421483','Amber hill 17b','London','Engleska'),
-(null,'Lukas','Mayer','lukasmayer@gmail.com','06431849780','Maffie platz 13','Stuttgart','Njemačka'),
-(null,'Luka','Lukić','lukalukić@gmail.com','0955874369','Kralja Tomislava 99a','Zagreb','Hrvatska'),
-(null,'Ivan','Ivanović','ivanovic@gmail.com','0998563478','Franje Kuhača 26c','Đakovo','Hrvatska'),
-(null,'Tara','Reić','tarareic@gmail.com','0987532687','Put brodarica 95','Split','Hrvatska');
+insert into korisnik(sifra,ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava,broj_vozacke)
+values (null,'Martina','Ivankovič','martinai@gmail.com','385912348796','Osječka ulica 78','Osijek','Hrvatska','1258796521'),
+(null,'James','Knowille','knowille@yhotmail.com','07084421483','Amber hill 17b','London','Engleska','55655214'),
+(null,'Lukas','Mayer','lukasmayer@gmail.com','06431849780','Maffie platz 13','Stuttgart','Njemačka','5502255'),
+(null,'Luka','Lukić','lukalukić@gmail.com','0955874369','Kralja Tomislava 99a','Zagreb','Hrvatska','125478522'),
+(null,'Ivan','Ivanović','ivanovic@gmail.com','0998563478','Franje Kuhača 26c','Đakovo','Hrvatska','151515'),
+(null,'Tara','Reić','tarareic@gmail.com','0987532687','Put brodarica 95','Split','Hrvatska','548456256');
 
 #Unos rezervacija
 insert into rezervacija (sifra,vozilo,cijena,lokacija,datum_preuzimanja,datum_povratka,korisnik,osiguranje)
