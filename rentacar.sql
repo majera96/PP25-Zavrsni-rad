@@ -6,6 +6,15 @@ drop database if exists RentACar;
 create database RentACar default charset utf8mb4;
 use RentACar;
 
+create table operater(
+    sifra int not null primary key auto_increment,
+    email varchar(50) not null,
+    lozinka varchar(100) not null,
+    ime varchar(50) not null,
+    prezime varchar(50) not null,
+    uloga varchar(20) not null
+);
+
 create table vozilo(
     sifra int not null primary key auto_increment,
     proizvodac varchar(30),
@@ -85,9 +94,9 @@ insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,mak
 values (null,'Škoda','Octavia','2021-09-11','dizel','manual',5,5),
 (null,'Škoda','Octavia','2022-03-12','dizel','automatik',5,5),
 (null,'Volkswagen','Passat','2020-05-21','dizel','automatik',5,5),
-(null,'Volkswages','Passat','2022-01-30','dizel','manual'5,5),
+(null,'Volkswages','Passat','2022-01-30','dizel','manual',5,5),
 (null,'Renault','Talisman','2020-04-10','benzin','manual',5,5),
-(null,'Audi','A4','2018-07-07','dizel','automatik'5,5);
+(null,'Audi','A4','2018-07-07','dizel','automatik',5,5);
 
 # 3. Cargo
 insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
@@ -103,7 +112,7 @@ values (null,'Audi','A6 50TDI Quattro','2021-12-19','dizel','automatik',5,5),
 # 5. Karavan
 insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
 values (null,'Renault','Clio Grandtour','2019-09-14','dizel','manual',5,5),
-(null,'Škoda','Octavia Combi','2018-02-27','benzin','manual'5,5);
+(null,'Škoda','Octavia Combi','2018-02-27','benzin','manual',5,5);
 
 # 6. SUV
 insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
@@ -113,10 +122,10 @@ values (null,'Volkswagen','Tiguan','2021-03-15','dizel','automatik',5,5),
 
 #Unos korisnika
 insert into korisnik(sifra,ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava,broj_vozacke)
-values (null,'Martina','Ivankovič','martinai@gmail.com','385912348796','Osječka ulica 78','Osijek','Hrvatska','1258796521'),
+values (null,'Martina','Ivanković','martinai@gmail.com','385912348796','Osječka ulica 78','Osijek','Hrvatska','1258796521'),
 (null,'James','Knowille','knowille@yhotmail.com','07084421483','Amber hill 17b','London','Engleska','55655214'),
 (null,'Lukas','Mayer','lukasmayer@gmail.com','06431849780','Maffie platz 13','Stuttgart','Njemačka','5502255'),
-(null,'Luka','Lukić','lukalukić@gmail.com','0955874369','Kralja Tomislava 99a','Zagreb','Hrvatska','125478522'),
+(null,'Luka','Lukić','lukalukic@gmail.com','0955874369','Kralja Tomislava 99a','Zagreb','Hrvatska','125478522'),
 (null,'Ivan','Ivanović','ivanovic@gmail.com','0998563478','Franje Kuhača 26c','Đakovo','Hrvatska','151515'),
 (null,'Tara','Reić','tarareic@gmail.com','0987532687','Put brodarica 95','Split','Hrvatska','548456256');
 
@@ -129,7 +138,7 @@ values (null,5,1150.00,4,'2022-05-02','2022-05-05',1,true),
 (null,22,5500.00,4,'2022-05-22','2022-05-26',5,true),
 (null,12,11000.00,2,'2022-01-02','2022-01-10',6,true);
 
-#Prikazati imena i prezimena korisnika te proizvodača i modela vozila koja su rezervirali
+#Prikazati imena i prezimena korisnika te proizvodaÄŤa i modela vozila koja su rezervirali
 select a.ime,a.prezime,b.vozilo,c.proizvodac,c.model
 from korisnik a inner join rezervacija b 
 on a.sifra = b.korisnik
@@ -140,6 +149,15 @@ on b.vozilo = c.sifra;
 #Iznos: 49.000
 select sum(cijena) from rezervacija;
 
+#Unos podataka za prijavu
+#Sifra za admina: admin
+#Sifra za operatera: operater
+insert into operater(email,lozinka,ime,prezime,uloga)
+values
+('admin@rentacar.hr','$2a$12$yei1kIwbwDdasAir64zPCO1xagPhfDz/yCT15on3kpu2OVHPBfw1O',
+    'Antonio','Majer','admin'),
+('operater@rentacar.hr','$2a$12$jphzmJ/AtHMk8AkE.cOPYe2ciIEg.t0NGY6XWmgJMhdBHee2O3OYm',
+    'RentACar', 'Operater','oper');
 
 
 

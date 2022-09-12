@@ -4,10 +4,9 @@ class App
 {
     public static function start()
     {
-        //echo 'Hello from App';
         $ruta = Request::getRuta();
 
-        //Log::log($dijelovi);
+        $dijelovi=explode('/', $ruta);
 
         $klasa = '';
         if(!isset($dijelovi[1]) || $dijelovi[1]===''){
@@ -16,8 +15,6 @@ class App
             $klasa = ucfirst($dijelovi[1]) . 'Controller';
         }
  
-        //Log::log($klasa);
-
         $metoda = '';
         if(!isset($dijelovi[2]) || $dijelovi[2]===''){
             $metoda = 'index';
@@ -25,13 +22,27 @@ class App
             $metoda = $dijelovi[2];
         }
 
-        //Log::log($metoda);
-
         if(class_exists($klasa) && method_exists($klasa,$metoda)){
             $instanca = new $klasa();
             $instanca->$metoda();
         } else {
-            echo 'Ne postoji ' . $klasa . '-&gt' . $metoda;
+            $view = new View();
+            $view->render('errorKlasaMetoda',[
+                'klasa'=>$klasa,
+                'metoda'=>$metoda
+            ]);
         }
+    }
+
+    public static function config($kljuc)
+    {
+        $configFile = BP_APP . 'konfiguracija.php';
+        if(!file_exist($configFile)){
+            return 'Datoteka' . $configFile . ' ne postoji. Kreiraj ju';
+        }
+        $config = require $configFile;
+        if(isset($config))
+
+
     }
 }
