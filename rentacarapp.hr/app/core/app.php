@@ -41,8 +41,28 @@ class App
             return 'Datoteka' . $configFile . ' ne postoji. Kreiraj ju';
         }
         $config = require $configFile;
-        if(isset($config))
+        if(isset($config[$kljuc])){
+            return $config[$kljuc];
+        }
 
+        return 'Ključ ' . $kljuc . ' ne postoji u datoteci ' . $configFile;
 
+    }
+
+    public static function auth()
+    {
+        if(!isset($_SESSION)){
+            return false;
+        }
+
+        if(!isset($_SESSION['autoriziran'])){
+            return false;
+        }
+        return true;
+    }
+
+    public static function user()
+    {
+        return $_SESSION['autoriziran'];
     }
 }
