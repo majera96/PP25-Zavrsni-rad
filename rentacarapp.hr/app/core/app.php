@@ -6,26 +6,26 @@ class App
     {
         $ruta = Request::getRuta();
 
-        $dijelovi=explode('/', $ruta);
+        $dijelovi = explode('/', $ruta);
 
-        $klasa = '';
+        $klasa='';
         if(!isset($dijelovi[1]) || $dijelovi[1]===''){
-            $klasa = 'Index Controller';
-        } else {
+            $klasa = 'IndexController';
+        }else{
             $klasa = ucfirst($dijelovi[1]) . 'Controller';
         }
- 
+        
         $metoda = '';
         if(!isset($dijelovi[2]) || $dijelovi[2]===''){
             $metoda = 'index';
-        } else{
+        }else{
             $metoda = $dijelovi[2];
         }
 
-        if(class_exists($klasa) && method_exists($klasa,$metoda)){
+        if(class_exists($klasa) && method_exists($klasa, $metoda)){
             $instanca = new $klasa();
             $instanca->$metoda();
-        } else {
+        }else{
             $view = new View();
             $view->render('errorKlasaMetoda',[
                 'klasa'=>$klasa,
@@ -34,19 +34,20 @@ class App
         }
     }
 
+
     public static function config($kljuc)
     {
         $configFile = BP_APP . 'konfiguracija.php';
-        if(!file_exist($configFile)){
-            return 'Datoteka' . $configFile . ' ne postoji. Kreiraj ju';
+        if(!file_exists($configFile)){
+            return 'Datoteka ' . $configFile . ' ne postoji. Kreirajte ju';
         }
         $config = require $configFile;
         if(isset($config[$kljuc])){
             return $config[$kljuc];
         }
 
-        return 'Ključ ' . $kljuc . ' ne postoji u datoteci ' . $configFile;
-
+        return 'Ključ ' . $kljuc . ' ne postoji u datoteci ' .  $configFile;
+   
     }
 
     public static function auth()
@@ -58,6 +59,7 @@ class App
         if(!isset($_SESSION['autoriziran'])){
             return false;
         }
+
         return true;
     }
 
@@ -65,4 +67,5 @@ class App
     {
         return $_SESSION['autoriziran'];
     }
+
 }

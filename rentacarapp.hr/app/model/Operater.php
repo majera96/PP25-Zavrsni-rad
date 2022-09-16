@@ -1,12 +1,11 @@
-<?php
+<<?php
 
 class Operater
 {
-
     public static function autoriziraj($email,$lozinka)
     {
-        $veza=DB::getInstance();
-        $izraz=$veza->prepare('
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
         
             select * from operater where email=:email;
         
@@ -14,7 +13,7 @@ class Operater
         $izraz->execute([
             'email'=>$email
         ]);
-        $operater=$izraz->fetch();
+        $operater = $izraz->fetch();
         if($operater==null){
             return null;
         }
@@ -24,6 +23,7 @@ class Operater
         unset($operater->lozinka);
         return $operater;
     }
+}
 
 
 

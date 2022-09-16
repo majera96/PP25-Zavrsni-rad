@@ -11,19 +11,20 @@ class View
 
     public function render($phtmlStranica, $parametri=[])
     {
-        $viewDatoteka = BP_APP . 'view' . DIRECTORY_SEPARATOR . $phtmlStranica . 'phtml';
+        $viewDatoteka = BP_APP . 'view' . 
+        DIRECTORY_SEPARATOR . $phtmlStranica . '.phtml';
         ob_start();
         extract($parametri);
-
+            
         if(file_exists($viewDatoteka)){
             include_once $viewDatoteka;
-        } else {
-            include_once BP_APP . 'view' . DIRECTORY_SEPARATOR . 'errorViewDatoteka.phtml';
+        }else{
+            include_once BP_APP . 'view' . 
+            DIRECTORY_SEPARATOR . 'errorViewDatoteka.phtml';
         }
-        $sadrzaj=ob_get_clean();
-
-        include_once BP_APP . 'view' . DIRECTORY_SEPARATOR . $this->predlozak . '.phtml';
-
+        $sadrzaj = ob_get_clean();
+        
+        include_once BP_APP . 'view' . 
+            DIRECTORY_SEPARATOR . $this->predlozak . '.phtml';
     }
-
 }

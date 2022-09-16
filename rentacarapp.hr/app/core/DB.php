@@ -2,12 +2,15 @@
 
 class DB extends PDO
 {
+
     private static $instanca=null;
 
     private function __construct()
     {
         extract(App::config('baza'));
-        $dsn='mysql:host=' . $server . ';dbname' . $baza . ';charset=utf8';
+        $dsn='mysql:host=' . 
+            $server . ';dbname=' . $baza .
+            ';charset=utf8';
         parent::__construct($dsn,$korisnik,$lozinka);
         $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
     }
@@ -19,4 +22,5 @@ class DB extends PDO
         }
         return self::$instanca;
     }
+
 }
