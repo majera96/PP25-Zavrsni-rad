@@ -1,6 +1,6 @@
 #Izrada ERD za zavrsni projekt
 
-#C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\Korisnik\Documents\GitHub\Projekt\rentacar.sql
+#C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\Korisnik\Documents\GitHub\Projekt\rentacarapp.hr\rentacar.sql
 
 drop database if exists RentACar;
 create database RentACar default charset utf8mb4;

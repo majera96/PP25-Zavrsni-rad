@@ -4,7 +4,7 @@ class LoginController extends Controller
 {
     public function prijava()
     {
-       $this->prijavaView('operater@rentacar.hr','Popunite tražene podatke');
+       $this->prijavaView('admin@rentacar.hr','Popunite tražene podatke');
     }
 
     public function autorizacija()
@@ -34,7 +34,6 @@ class LoginController extends Controller
             return;
         }
 
-
             $_SESSION['autoriziran']=$operater;
             header('location:' . App::config('url') . 'nadzornaploca');
 
@@ -56,7 +55,3 @@ class LoginController extends Controller
                
     }
 }
-
-
-
-

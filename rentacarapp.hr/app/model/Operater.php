@@ -1,4 +1,4 @@
-<<?php
+<?php
 
 class Operater
 {
@@ -24,7 +24,6 @@ class Operater
         return $operater;
     }
 }
-
 
 
 
