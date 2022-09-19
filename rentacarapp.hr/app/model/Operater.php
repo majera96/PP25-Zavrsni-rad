@@ -1,3 +1,4 @@
+
 <?php
 
 class Operater
@@ -23,10 +24,4 @@ class Operater
         unset($operater->lozinka);
         return $operater;
     }
-}
-
-
-
-
-
 }

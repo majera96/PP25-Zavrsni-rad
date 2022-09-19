@@ -8,6 +8,7 @@ class App
 
         $dijelovi = explode('/', $ruta);
 
+
         $klasa='';
         if(!isset($dijelovi[1]) || $dijelovi[1]===''){
             $klasa = 'IndexController';
@@ -15,6 +16,7 @@ class App
             $klasa = ucfirst($dijelovi[1]) . 'Controller';
         }
         
+
         $metoda = '';
         if(!isset($dijelovi[2]) || $dijelovi[2]===''){
             $metoda = 'index';
@@ -22,9 +24,21 @@ class App
             $metoda = $dijelovi[2];
         }
 
+         $parametar='';
+         if(!isset($dijelovi[3]) || $dijelovi[3]===''){
+            $parametar = '';
+        }else{
+            $parametar = $dijelovi[3];
+        }
+
         if(class_exists($klasa) && method_exists($klasa, $metoda)){
             $instanca = new $klasa();
-            $instanca->$metoda();
+            if(strlen($parametar)>0){
+                $instanca->$metoda($parametar);
+            }else{
+                $instanca->$metoda();
+            }
+            
         }else{
             $view = new View();
             $view->render('errorKlasaMetoda',[
