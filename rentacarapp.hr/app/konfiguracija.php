@@ -15,16 +15,15 @@ if($dev){
         ]
     ];
 }else{
-    // PRODUKCIJA
     return [
         'dev'=>$dev,
-        'url'=>'http://rentacarapp.hr/',
+        'url'=>'https://polaznik02.edunova.hr/',
         'nazivApp'=>'Rent a car',
         'baza'=>[
             'server'=>'localhost',
-            'baza'=>'rentacar',
-            'korisnik'=>'admin',
-            'lozinka'=>'admin'
+            'baza'=>'aurelije_rentacar',
+            'korisnik'=>'aurelije_admin',
+            'lozinka'=>'a4R.DBh7Ezc]'
     ]
         ];
 }
