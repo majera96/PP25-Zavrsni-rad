@@ -1,0 +1,39 @@
+<table>
+    <thead>
+        <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Email</th>
+            <th>Broj mobitela</th>
+            <th>Ime ulice</th>
+            <th>Grad</th>
+            <th>Država</th>
+            <th>Broj vozačke</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($korisici as $k): ?>
+            <tr>
+                <td><?=$k->ime?></td>
+                <td><?=$k->prezime?></td>
+                <td><?=$k->email?></td>
+                <td><?=$k->broj_mobitela?></td>
+                <td><?=$k->ime_ulice?></td>
+                <td><?=$k->grad?></td>
+                <td><?=$k->država?></td>
+                <td><?=$k->broj_vozačke?></td>
+                <td>
+                <a href="<?=App::config('url')?>korisnik/promjena/<?=$s->sifra?>">
+                        <i style="color: blue;" 
+                        class="step fi-pencil size-36"></i>
+                     </a>
+                        &nbsp;&nbsp;
+                     <a href="<?=App::config('url')?>korisnik/brisanje/<?=$s->sifra?>">
+                        <i style="color: red;" 
+                        class="step fi-page-delete size-36"></i>
+                     </a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+    </tbody>
+</table>
