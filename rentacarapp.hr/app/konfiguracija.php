@@ -9,7 +9,7 @@ if($dev){
         'nazivApp'=>'Rent a car',
         'baza'=>[
             'server'=>'localhost',
-            'baza'=>'rentacar',
+            'baza'=>'RentACar',
             'korisnik'=>'admin',
             'lozinka'=>'admin'
         ]

@@ -1,7 +1,10 @@
+<a href="<?=App::config('url')?>korisnik/novi"
+    class="success button expanded">Dodaj novi</a>
+
 <table>
     <thead>
         <tr>
-            <th>Ime</th>
+        <th>Ime</th>
             <th>Prezime</th>
             <th>Email</th>
             <th>Broj mobitela</th>
@@ -12,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($korisici as $k): ?>
+    <?php foreach($korisnici as $k): ?>
             <tr>
                 <td><?=$k->ime?></td>
                 <td><?=$k->prezime?></td>
@@ -20,20 +23,16 @@
                 <td><?=$k->broj_mobitela?></td>
                 <td><?=$k->ime_ulice?></td>
                 <td><?=$k->grad?></td>
-                <td><?=$k->država?></td>
-                <td><?=$k->broj_vozačke?></td>
+                <td><?=$k->drzava?></td>
+                <td><?=$k->broj_vozacke?></td>
                 <td>
-                <a href="<?=App::config('url')?>korisnik/promjena/<?=$s->sifra?>">
-                        <i style="color: blue;" 
-                        class="step fi-pencil size-36"></i>
+                    <a href="<?=App::config('url')?>korisnik/promjena/<?=$k->sifra?>">Promjena
                      </a>
-                        &nbsp;&nbsp;
-                     <a href="<?=App::config('url')?>korisnik/brisanje/<?=$s->sifra?>">
-                        <i style="color: red;" 
-                        class="step fi-page-delete size-36"></i>
+                    &nbsp;&nbsp;
+                     <a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">Brisanje
                      </a>
                 </td>
             </tr>
-            <?php endforeach; ?>
+        <?php endforeach;?>
     </tbody>
 </table>

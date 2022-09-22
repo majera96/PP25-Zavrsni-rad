@@ -122,12 +122,12 @@ values (null,'Volkswagen','Tiguan','2021-03-15','dizel','automatik',5,5),
 
 #Unos korisnika
 insert into korisnik(sifra,ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava,broj_vozacke)
-values (null,'Martina','Ivanković','martinai@gmail.com','385912348796','Osječka ulica 78','Osijek','Hrvatska','1258796521'),
-(null,'James','Knowille','knowille@yhotmail.com','07084421483','Amber hill 17b','London','Engleska','55655214'),
-(null,'Lukas','Mayer','lukasmayer@gmail.com','06431849780','Maffie platz 13','Stuttgart','Njemačka','5502255'),
-(null,'Luka','Lukić','lukalukic@gmail.com','0955874369','Kralja Tomislava 99a','Zagreb','Hrvatska','125478522'),
-(null,'Ivan','Ivanović','ivanovic@gmail.com','0998563478','Franje Kuhača 26c','Đakovo','Hrvatska','151515'),
-(null,'Tara','Reić','tarareic@gmail.com','0987532687','Put brodarica 95','Split','Hrvatska','548456256');
+values (null,'Martina','Ivanković','martinai@gmail.com','385912348796','Osječka ulica 78','Osijek','Hrvatska',1258796521),
+(null,'James','Knowille','knowille@yhotmail.com','07084421483','Amber hill 17b','London','Engleska',55655214),
+(null,'Lukas','Mayer','lukasmayer@gmail.com','06431849780','Maffie platz 13','Stuttgart','Njemačka',5502255),
+(null,'Luka','Lukić','lukalukic@gmail.com','0955874369','Kralja Tomislava 99a','Zagreb','Hrvatska',125478522),
+(null,'Ivan','Ivanović','ivanovic@gmail.com','0998563478','Franje Kuhača 26c','Đakovo','Hrvatska',151515),
+(null,'Tara','Reić','tarareic@gmail.com','0987532687','Put brodarica 95','Split','Hrvatska',548456256);
 
 #Unos rezervacija
 insert into rezervacija (sifra,vozilo,cijena,lokacija,datum_preuzimanja,datum_povratka,korisnik,osiguranje)
