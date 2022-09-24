@@ -20,13 +20,39 @@ class KorisnikController extends AutorizacijaController
         ]);
     }
 
-    public function promjena()
+    public function promjena($sifra)
     {
 
-     }
+        if(isset($_POST['naziv'])){
+            if($korisnik==null){
+                header('location: ' . App::config('url') . 'korisnik');
+            }
+
+            $this->view->render($this->phtmlDir . 'update',[
+                'korisnik'=>$korisnik,
+                'poruka'=>'Promjenite podatke'
+            ]);
+
+            return;
+        }
+
+        $this->korisnik = (object) $_POST;
+        $this->korisnik->sifra=$sifra;
+
+        if($this->kontrolaPromjena()){
+            Korisnik::update((array)$this->korisnik);
+            header('location: ' . App::config('url') . 'korisnik');
+            return;
+        }
+
+        $this->view->render($this->phtmlDir . 'update',[
+            'korisnik'=>$this->korisnik,
+            'poruka'=>$this->poruka
+        ]);
+    }
 
 
-    public function brisanje($sifra)
+    public function brisanje()
     {
 
   
