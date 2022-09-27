@@ -13,8 +13,10 @@ class KorisnikController extends AutorizacijaController
     public function index()
     {
 
-       $this->view->render($this->phtmlDir . 'read',[
-            'korisnici' => $k
+        $korisnici = Korisnik::read();
+
+        $this->view->render($this->phtmlDir . 'read',[
+            'korisnici' => $korisnici
         ]);
     }
 
@@ -22,8 +24,8 @@ class KorisnikController extends AutorizacijaController
     {
         if(!isset($_POST['naziv'])){
 
-            $smjer = Smjer::readOne($sifra);
-            if($smjer==null){
+            $korisnik = Korisnik::readOne($sifra);
+            if($korisnik==null){
                 header('location: ' . App::config('url') . 'korisnik');
             }
 
@@ -77,7 +79,7 @@ class KorisnikController extends AutorizacijaController
     public function novi()
     {
         if(!isset($_POST['naziv'])){
-            $this->pripremiKorisnika();
+            $this->pripremiSmjer();
             $this->view->render($this->phtmlDir . 'create',[
                 'korisnik'=>$this->korisnik,
                 'poruka'=>'Popunite sve podatke'
@@ -85,11 +87,10 @@ class KorisnikController extends AutorizacijaController
             return;
         }
          
-        
-        $this->smjer = (object) $_POST;
+        $this->korisnik = (object) $_POST;
     
         if($this->kontrolaNovi()){
-            Smjer::create((array)$this->smjer);
+            Korisnik::create((array)$this->korisnik);
             header('location: ' . App::config('url') . 'korisnik');
             return;
         }
@@ -100,35 +101,7 @@ class KorisnikController extends AutorizacijaController
         ]);
         
     }
-
-    private function kontrolaNovi()
-    {
-        return $this->kontrolaIme() && $this->kontrolaPrezime();
-    }
-
-    private function kontrolaPromjena()
-    {
-        return $this->kontrolaIme();
-    }
-
-    private function kontrolaIme()
-    {
-        if(strlen($this->korisnik->ime)===0){
-            $this->poruka = 'Ime obavezno';
-            return false;
-        }
-        return true;
-    }
-
-    private function kontrolaPrezime()
-    {
-        if(strlen($this->korisnik->prezime)===0){
-            $this->poruka = 'Prezime obavezno';
-            return false;
-        }
-        return true;
-    }
-   
+    
     private function pripremiSmjer()
     {
         $this->korisnik=new stdClass();
@@ -138,8 +111,8 @@ class KorisnikController extends AutorizacijaController
         $this->korisnik->broj_mobitela='';
         $this->korisnik->ime_ulice='';
         $this->korisnik->grad='';
-        $this->korisnik->država='';
-        $this->korisnik->broj_vozačke='';
+        $this->korisnik->drzava='';
+        $this->korisnik->broj_vozacke='';
     }
 
 }
