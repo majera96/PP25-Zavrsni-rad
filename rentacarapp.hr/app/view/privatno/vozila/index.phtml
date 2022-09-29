@@ -1,0 +1,36 @@
+<a class="success button expanded" 
+    href="<?=App::config('url')?>vozila/unosVozila">
+        Dodaj novo vozilo
+</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Proizvođač vozila</th>
+            <th>Model vozila</th>
+            <th>Godište vozila</th>
+            <th>Mjenjač</th>
+            <th>Broj vrata</th>
+            <th>Maksimalni broj putnika</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($vozilo as $v): ?>
+            <tr>
+                <td><?=$v->proizvodac?></td>
+                <td><?=$v->model?></td>
+                <td><?=$v->godiste?></td>
+                <td><?=$v->mjenjac?></td>
+                <td><?=$v->broj_vrata?></td>
+                <td><?=$v->maksimalni_broj_putnika?></td>
+                <td>
+                    <a href="<?=App::config('url')?>vozilo/promjena/<?=$v->sifra?>">Promjena
+                     </a>
+                    &nbsp;&nbsp;
+                     <a href="<?=App::config('url')?>vozilo/brisanje/<?=$v->sifra?>">Brisanje
+                     </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

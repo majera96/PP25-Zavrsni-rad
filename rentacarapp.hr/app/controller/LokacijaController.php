@@ -67,7 +67,6 @@ class LokacijaController extends AutorizacijaController
         return $this->kontrolaIme() && $this->kontrolaPrezime()
         && $this->kontrolaOib();
     }
-
     private function kontrolaIme()
     {
         if(strlen($this->entitet->ime)===0){
@@ -76,7 +75,6 @@ class LokacijaController extends AutorizacijaController
         }
         return true;
     }
-
     private function kontrolaPrezime()
     {
         if(strlen($this->entitet->prezime)===0){

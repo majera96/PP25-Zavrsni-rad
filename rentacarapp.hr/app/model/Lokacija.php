@@ -22,7 +22,7 @@ class Lokacija
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select * from lokacija order by grad
+            select * from lokacija
         
         ');
         $izraz->execute();
