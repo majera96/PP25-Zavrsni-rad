@@ -28,14 +28,32 @@ class Korisnik
     return $izraz->fetchAll();
     }
 
-    public static function create()
+    public static function create($korisnik)
     {
-    
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            insert into 
+            korisnik(ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava,broj_vozacke)
+            values (:ime,:prezime,:email,:broj_mobitela,:ime_ulice,:grad,:drzava,:broj_vozacke)
+        
+        ');
+        $izraz->execute($korisnik);
     }
 
-    public static function delete()
+    public static function delete($sifra)
     {
-
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            select count(*) from korisnik where korisnik=:sifra
+        
+        ');
+        $izraz->execute([
+            'sifra'=>$sifra
+        ]);
+        $ukupno = $izraz->fetchColumn();
+        return $ukupno==0;
     }
 
     public static function update($korisnik)
