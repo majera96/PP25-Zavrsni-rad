@@ -50,7 +50,7 @@ class LokacijaController extends AutorizacijaController
         $this->entitet = (object) $_POST;
         $this->entitet->sifra=$sifra;
     
-     /*   if($this->kontrola()){
+        /*if($this->kontrola()){
             Lokacija::update((array)$this->entitet);
             header('location: ' . App::config('url') . 'lokacija');
             return;

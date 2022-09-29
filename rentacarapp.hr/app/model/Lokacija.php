@@ -55,7 +55,7 @@ class Lokacija
                 grad=:grad,
                 broj_mobitela=:broj_mobitela,
                 email=:email
-                    where sifra=:sifra
+                where sifra=:sifra
         
         ');
         $izraz->execute($lokacija);
