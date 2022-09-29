@@ -23,6 +23,13 @@
                 <td><?=$e->grad?></td>
                 <td><?=$e->broj_mobitela?></td>
                 <td><?=$e->email?></td>
+                <td>
+                    <a href="<?=App::config('url')?>lokacija/promjena/<?=$e->sifra?>">Promjena
+                     </a>
+                    &nbsp;&nbsp;
+                     <a href="<?=App::config('url')?>lokacija/brisanje/<?=$e->sifra?>">Brisanje
+                     </a>
+                </td>
             </tr>
         <?php endforeach; ?>
     </tbody>

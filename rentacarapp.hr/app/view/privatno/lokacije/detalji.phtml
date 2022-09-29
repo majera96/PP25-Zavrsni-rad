@@ -1,23 +1,33 @@
-<form action="<?=App::config('url')?>lokacija/promjena/<?=$e->sifra?>" 
-method="post">
+<form method="post" 
+action="<?=App::config('url')?>lokacija/promjena/<?=$e->sifra?>">
+  <h4 class="text-center">Informacije o poslovnicama</h4>
+  
+  
+  <label>Naziv ulice
+    <input type="text" name="naziv_ulice" value="<?=$e->naziv_ulice?>" />
+  </label>
 
-<label for="naziv">Naziv</label>
-<input type="text" name="naziv" id="naziv" value="<?=$e->naziv_ulice?>">
+  <label>Broj ulice
+    <input type="text" name="broj_ulice" value="<?=$e->broj_ulice?>" />
+  </label>
 
-<label for="lokacija">Lokacija</label>
-<select name="lokacija" id="lokacija">
-    <?php foreach($lokacije as $l): ?>
-        <option
-        <?php if ($e->lokacija==$l->sifra){
-            echo ' selected="selected"';
-        }
-        ?>
-        value="<?=$l->sifra?>"><?=$l->naziv_ulice?></option>
-    <?php endforeach; ?>
-</select>
+  <label>Poštanski broj
+    <input type="text" name="postanski_broj" value="<?=$e->postanski_broj?>" />
+  </label>
 
+  <label>Grad
+    <input type="text" name="grad" value="<?=$e->grad?>" />
+  </label>
 
-<?=$poruka?>
+  <label>Broj mobitela
+    <input type="text" name="grad" value="<?=$e->grad?>" />
+  </label>
+
+  <label>Email
+    <input type="email" name="email" value="<?=$e->email?>" />
+  </label>
+
+  <?=$poruka?>
 
   <div class="grid-x grid-padding-x">
     <div class="large-6 cell">
@@ -28,5 +38,6 @@ method="post">
         <input type="submit" class="button expanded" value="Spremi"></input>
     </div>
   </div>
+
 
 </form>
