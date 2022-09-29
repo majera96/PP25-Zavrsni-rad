@@ -1,0 +1,29 @@
+<a class="success button expanded" 
+    href="<?=App::config('url')?>lokcija/nova">
+        Dodaj novu lokaciju/poslovnicu
+</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Naziv ulice</th>
+            <th>Broj ulice</th>
+            <th>Poštanski broj</th>
+            <th>Grad</th>
+            <th>Broj mobitela</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($entiteti as $e): ?>
+            <tr>
+                <td><?=$e->naziv_ulice?></td>
+                <td><?=$e->broj_ulice?></td>
+                <td><?=$e->postanski_broj?></td>
+                <td><?=$e->grad?></td>
+                <td><?=$e->broj_mobitela?></td>
+                <td><?=$e->email?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
