@@ -2,133 +2,121 @@
 
 class VoziloController extends AutorizacijaController
 {
-    private $phtmlDir = 'privatno' . DIRECTORY_SEPARATOR . 'vozila' . DIRECTORY_SEPARATOR;
-    private $vozilo = null;
-    private $poruka = '';
+
+    private $phtmlDir = 'privatno' . 
+        DIRECTORY_SEPARATOR . 'vozila' .
+        DIRECTORY_SEPARATOR;
+
+    private $vozilo=null;
+    private $poruka='';
 
     public function index()
     {
-        $this->view->render($this->phtmlDir . 'index',[
-            'vozilo'=>Vozilo::read()
+        $this->view->render($this->phtmlDir . 'read',[
+            'vozilo' => $vozilo
         ]);
     }
 
-   
- public function unosVozila()
-    {
-        if (count($_POST) == 0) {
-            $this->pripremiVozilo();
-            $this->view->render(
-                $this->phtmlDir . 'create',
-                ['vozilo' => $this->vozilo, 
-                'poruka' => 'Ispuniti podatke označene sa *']
-            );
-            return;
-        }
-
-        $this->vozilo = (object) $_POST;
-
-        if ($this->kontrolirajUnosVozila()) {
-            Vozilo::create((array)$this->vozilo);
-            header('location: ' . App::config('url') . 'vozila');
-            return;
-        }
-
-        $this->view->render(
-            $this->phtmlDir . 'create',
-            ['vozilo' => $this->vozilo, 
-            'poruka' => $this->poruka]
-        );
-    }
-
-    private function kontrolirajUnosVozila()
-    {
-        return $this->kontrolirajProizvodac()
-            && $this->kontrolirajModel()
-            && $this->kontrolirajGodiste();
-    }
-
-    // Izmjena START
     public function promjena($sifra)
     {
-        if(count($_POST) == 0){
-            $vozio = Vozilo::readOne($sifra);
+        if(!isset($_POST['proizvodac'])){
 
-            if ($vozilo==null) {
-                header('location: ' . App::config('url') . 'vozila');
+            $vozilo = Vozilo::readOne($sifra);
+            if($vozilo==null){
+                header('location: ' . App::config('url') . 'vozilo');
             }
 
-            $this->view->render(
-                $this->phtmlDir . 'update',
-                ['vozilo' => $vozilo,
-                 'poruka' => 'Ispuniti podatke označene sa *']
-            );
+            $this->view->render($this->phtmlDir . 'update',[
+                'vozilo' => $vozilo,
+                'poruka' => 'Promjenite podatke'
+            ]);
             return;
         }
 
         $this->vozilo = (object) $_POST;
-        $this->vozilo->sifra = $sifra;
+        $this->vozilo->sifra=$sifra;
 
-        if($this->kontrolirajPromjenu()) {
+        if($this->kontrolaPromjena()){
             Vozilo::update((array)$this->vozilo);
-            header('location: ' . App::config('url') . 'vozila');
             return;
         }
 
-        $this->view->render(
-            $this->phtmlDir . 'update',
-            ['vozilo' => $this->vozilo, 
-            'poruka' => $this->poruka]
-        );
+        $this->view->render($this->phtmlDir . 'update',[
+            'vozilo'=>$this->vozilo,
+            'poruka'=>$this->poruka
+        ]);
+
+
     }
 
-    public function kontrolirajPromjenu()
-    {
-        return $this->kontrolirajProizvodac()
-            && $this->kontrolirajModel()
-            && $this->kontrolirajGodiste();
-    }
-    
     public function brisanje($sifra)
     {
+
         $vozilo = Vozilo::readOne($sifra);
-
-        if ($vozilo == null) {
-            header('location: ' . App::config('url') . 'vozila');
+        if($vozilo==null){
+            header('location: ' . App::config('url') . 'vozilo');
         }
 
-        if (!isset($_POST['obrisi'])) {
-            $this->view->render(
-                $this->phtmlDir . 'delete',
-                [
-                    'vozilo' => $vozilo,
-                    'poruka' => 'Provjerite detalje vozila koji će biti obrisan:'
-                ]
-            );
-            return;
-        }
-
-        if (!isset($_POST['potvrdiBrisanje'])) {
-            $this->view->render(
-                $this->phtmlDirektorij . 'delete',
-                [
-                    'vozilo' => $vozilo,
-                    'poruka' => 'Potvrdite brisanje:'
-                ]
-            );
+        if(!isset($_POST['obrisi'])){
+            $this->view->render($this->phtmlDir . 'delete',[
+                'vozilo' => $vozilo,
+                'brisanje'=>Vozilo::brisanje($sifra),
+                'poruka' => 'Detalji vozila za brisanje'
+            ]);
             return;
         }
 
         Vozilo::delete($sifra);
-        header('location: ' . App::config('url') . 'vozila');
+        header('location: ' . App::config('url') . 'vozilo');
+        
+
     }
+
+    public function novi()
+    {
+        if(!isset($_POST['proizvodac'])){
+            $this->pripremiVozilo();
+            $this->view->render($this->phtmlDir . 'create',[
+                'vozilo'=>$this->vozilo,
+                'poruka'=>'Popunite sve podatke'
+            ]);
+            return;
+        }
+         
+        $this->vozilo = (object) $_POST;
     
-    private function kontrolirajProizvodac($promjenaUnosa = false)
+        if($this->kontrolaNovi()){
+            Vozilo::create((array)$this->vozilo);
+            header('location: ' . App::config('url') . 'vozilo');
+            return;
+        }
+
+        $this->view->render($this->phtmlDir . 'create',[
+            'vozilo'=>$this->vozilo,
+            'poruka'=>$this->poruka
+        ]);
+        
+    }
+
+    private function kontrolaNovi()
+    {
+        return $this->kontrolirajProizvodac() && $this->kontrolirajGodiste() && kontrolirajModel();
+    }
+
+    private function kontrolaPromjena()
+    {
+        return $this->kontrolaNovi();
+    }
+
+    private function kontrolaNaziv()
+    {
+        
+    private function kontrolirajProizvodac()
     {
         $this->vozilo->proizvodac = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->vozilo->proizvodac))));
 
         if ($this->vozilo->proizvodac == '') {
-            $this->poruka = 'Proizvodac vozila je obavezan';
+            $this->poruka = 'Proizvođač vozila je obavezan';
             return false;
         }
     }
@@ -165,7 +153,6 @@ class VoziloController extends AutorizacijaController
         $this->vozilo->godiste = '';
         $this->vozilo->gorivo = '';
         $this->vozilo->mjenjac = '';
-        $this->vozilo->broj_vrata = '';
-        $this->vozilo->maksimalni_broj_putnika = '';
+        $this->vozilo->opis = '';
     }
 }
