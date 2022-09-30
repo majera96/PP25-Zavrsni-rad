@@ -1,7 +1,6 @@
 #Izrada ERD za zavrsni projekt
 
 #C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\Korisnik\Documents\GitHub\Projekt\rentacarapp.hr\rentacar.sql
-
 drop database if exists RentACar;
 create database RentACar default charset utf8mb4;
 use RentACar;
@@ -22,8 +21,7 @@ create table vozilo(
     godiste datetime,
     gorivo varchar(30),
     mjenjac varchar(20),
-    broj_vrata decimal(8,5),
-    maksimalni_broj_putnika decimal(8,5)
+    opis varchar(200)
     );
 
 create table rezervacija(
@@ -56,7 +54,7 @@ create table korisnik(
     ime_ulice varchar(100),
     grad varchar(50),
     drzava varchar(30),
-    broj_vozacke decimal(18,9)
+    broj_vozacke int(25)
 );
 
 create table slikavozila(
@@ -80,44 +78,44 @@ values (null,'Ul.Franje Kuhača','26c',31400,'Đakovo',0955551111,'rentacardj@re
 
 
 # 1. Gradska vozila > planiram dodati kategorije pa podjeliti vozila na njih
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
-values (null,'Ford','Fiesta','2021-05-24','benzin','automatik',3,2),
-(null,'Volkswages','Up','2022-01-19','dizel','automatik',3,2),
-(null,'Renault','Twingo','2022-05-01','dizel','automatik',5,4),
-(null,'Peugeot','108','2020-12-20','dizel','automatik',3,2),
-(null,'Hyundai','i10','2019-03-22','hybrid','automatik',3,2),
-(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin','manual',3,2),
-(null,'Mazda','2','2018-07-05','dizel','manual',3,2);
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opis)
+values (null,'Ford','Fiesta','2021-05-24','benzin','automatik','dodatno'),
+(null,'Volkswages','Up','2022-01-19','dizel','automatik','dodatno'),
+(null,'Renault','Twingo','2022-05-01','dizel','automatik','dodatno'),
+(null,'Peugeot','108','2020-12-20','dizel','automatik','dodatno'),
+(null,'Hyundai','i10','2019-03-22','hybrid','automatik','dodatno'),
+(null,'Smart','Fortwo cabrio Brabus','2021-01-4','benzin','manual','dodatno'),
+(null,'Mazda','2','2018-07-05','dizel','manual','dodatno');
 
 # 2. Limuzine
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
-values (null,'Škoda','Octavia','2021-09-11','dizel','manual',5,5),
-(null,'Škoda','Octavia','2022-03-12','dizel','automatik',5,5),
-(null,'Volkswagen','Passat','2020-05-21','dizel','automatik',5,5),
-(null,'Volkswages','Passat','2022-01-30','dizel','manual',5,5),
-(null,'Renault','Talisman','2020-04-10','benzin','manual',5,5),
-(null,'Audi','A4','2018-07-07','dizel','automatik',5,5);
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opis)
+values (null,'Škoda','Octavia','2021-09-11','dizel','manual','dodatno'),
+(null,'Škoda','Octavia','2022-03-12','dizel','automatik','dodatno'),
+(null,'Volkswagen','Passat','2020-05-21','dizel','automatik','dodatno'),
+(null,'Volkswages','Passat','2022-01-30','dizel','manual','dodatno'),
+(null,'Renault','Talisman','2020-04-10','benzin','manual','dodatno'),
+(null,'Audi','A4','2018-07-07','dizel','automatik','dodatno');
 
 # 3. Cargo
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
-values (null,'Volkswages','Caddy','2017-12-21','dizel','manul',3,3),
-(null,'Volkswages','Crafter Furgon','2020-10-11','dizel','manul',3,3);
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opis)
+values (null,'Volkswages','Caddy','2017-12-21','dizel','manul','dodatno'),
+(null,'Volkswages','Crafter Furgon','2020-10-11','dizel','manul','dodatno');
 
 # 4. Luksuzna
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
-values (null,'Audi','A6 50TDI Quattro','2021-12-19','dizel','automatik',5,5),
-(null,'Audi','A5 50TDI Quattro','2020-06-11','dizel','automatik',5,5),
-(null,'BMW','750 xDrive','2022-06-13','dizel','automatik',5,5);
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opis)
+values (null,'Audi','A6 50TDI Quattro','2021-12-19','dizel','automatik','dodatno'),
+(null,'Audi','A5 50TDI Quattro','2020-06-11','dizel','automatik','dodatno'),
+(null,'BMW','750 xDrive','2022-06-13','dizel','automatik','dodatno');
 
 # 5. Karavan
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
-values (null,'Renault','Clio Grandtour','2019-09-14','dizel','manual',5,5),
-(null,'Škoda','Octavia Combi','2018-02-27','benzin','manual',5,5);
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opis)
+values (null,'Renault','Clio Grandtour','2019-09-14','dizel','manual','dodatno'),
+(null,'Škoda','Octavia Combi','2018-02-27','benzin','manual','dodatno');
 
 # 6. SUV
-insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
-values (null,'Volkswagen','Tiguan','2021-03-15','dizel','automatik',5,5),
-(null,'Škoda','Kodiaq','2019-03-17','benzin','manual',5,5);
+insert into vozilo (sifra,proizvodac,model,godiste,gorivo,mjenjac,opis)
+values (null,'Volkswagen','Tiguan','2021-03-15','dizel','automatik','dodatno'),
+(null,'Škoda','Kodiaq','2019-03-17','benzin','manual','dodatno');
 
 
 #Unos korisnika
