@@ -89,11 +89,11 @@ class KorisnikController extends AutorizacijaController
          
         $this->korisnik = (object) $_POST;
     
-       if($this->kontrolaNovi()){
+      /* if($this->kontrolaNovi()){
             Korisnik::create((array)$this->korisnik);
             header('location: ' . App::config('url') . 'korisnik');
             return;
-        } 
+        } */ 
 
         $this->view->render($this->phtmlDir . 'create',[
             'korisnik'=>$this->korisnik,
