@@ -3,15 +3,14 @@
 class VoziloController extends AutorizacijaController
 {
     private $phtmlDir = 'privatno' . DIRECTORY_SEPARATOR . 'vozila' . DIRECTORY_SEPARATOR;
-    private $vozio = null;
+    private $vozilo = null;
     private $poruka = '';
 
     public function index()
     {
-        $this->view->render(
-            $this->phtmlDir . 'index',
-            ['vozilo' => Vozilo::read()]
-        );
+        $this->view->render($this->phtmlDir . 'index',[
+            'vozilo'=>Vozilo::read()
+        ]);
     }
 
    
@@ -158,7 +157,7 @@ class VoziloController extends AutorizacijaController
         return true;
     }
 
-    private function pripremiUnos()
+    private function pripremiVozilo()
     {
         $this->vozilo = new stdClass();
         $this->vozilo->proizvodac = '';

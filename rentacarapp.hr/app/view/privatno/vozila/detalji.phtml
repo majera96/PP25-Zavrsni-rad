@@ -1,0 +1,43 @@
+<form method="post" 
+action="<?=App::config('url')?>vozilo/promjena/<?=$v->sifra?>">
+  <h4 class="text-center">Informacije o vozilima</h4>
+  
+  
+  <label>Proizvođač vozila
+    <input type="text" name="proizvodac" value="<?=$v->proizvodac?>" />
+  </label>
+
+  <label>Model vozila
+    <input type="text" name="model" value="<?=$v->model?>" />
+  </label>
+
+  <label>Godište vozila
+    <input type="text" name="godiste" value="<?=$v->godiste?>" />
+  </label>
+
+  <label>Mjenjač
+    <input type="text" name="mjenjac" value="<?=$v->mjenjac?>" />
+  </label>
+
+  <label>Gorivo
+    <input type="text" name="gorivo" value="<?=$v->gorivo?>" />
+  </label>
+
+  <label>Opis vozila
+    <input type="text" name="opis" value="<?=$v->opis?>" />
+  </label>
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>vozilo">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <input type="submit" class="button expanded" value="Spremi"></input>
+    </div>
+  </div>
+
+
+</form>

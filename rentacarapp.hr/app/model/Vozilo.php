@@ -8,9 +8,9 @@ class Vozilo
         $izraz = $veza->prepare('
         
             insert into vozilo
-            (proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,maksimalni_broj_putnika)
+            (proizvodac,model,godiste,gorivo,mjenjac,broj_vrata,opis)
             values
-            (:proizvodac,:model,:godiste,:gorivo,:mjenjac,:broj_vrata,:maksimalni_broj_putnika)
+            (:proizvodac,:model,:godiste,:gorivo,:mjenjac,:opis)
         
         ');
         $izraz->execute($vozilo);
@@ -47,8 +47,7 @@ class Vozilo
             model = :model,
             godiste = :godiste,
             mjenjac = :mjenjac,
-            broj_vrata = :broj_vrata,
-            maksimalni_broj_putnika = :maksimalni_broj_putnika
+            opis = :opis
             where sifra = :sifra
         
         ');

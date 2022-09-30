@@ -10,8 +10,8 @@
             <th>Model vozila</th>
             <th>Godište vozila</th>
             <th>Mjenjač</th>
-            <th>Broj vrata</th>
-            <th>Maksimalni broj putnika</th>
+            <th>Gorivo</th>
+            <th>Opis</th>
         </tr>
     </thead>
     <tbody>
@@ -21,8 +21,8 @@
                 <td><?=$v->model?></td>
                 <td><?=$v->godiste?></td>
                 <td><?=$v->mjenjac?></td>
-                <td><?=$v->broj_vrata?></td>
-                <td><?=$v->maksimalni_broj_putnika?></td>
+                <td><?=$v->gorivo?></td>
+                <td><?=$v->opis?></td>
                 <td>
                     <a href="<?=App::config('url')?>vozilo/promjena/<?=$v->sifra?>">Promjena
                      </a>
