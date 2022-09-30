@@ -35,7 +35,7 @@ class Korisnik
         
             insert into 
             korisnik(ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava,broj_vozacke)
-            values (:ime,:prezime,:email,:broj_mobitela,:ime_ulice,:grad,:drzava,:broj_vozacke)
+            values(:ime,:prezime,:email,:broj_mobitela,:ime_ulice,:grad,:drzava,:broj_vozacke)
         
         ');
         $izraz->execute($korisnik);
@@ -46,14 +46,12 @@ class Korisnik
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select count(*) from korisnik where korisnik=:sifra
+            delete from korisnik where sifra=:sifra
         
         ');
         $izraz->execute([
             'sifra'=>$sifra
         ]);
-        $ukupno = $izraz->fetchColumn();
-        return $ukupno==0;
     }
 
     public static function update($korisnik)
@@ -76,7 +74,5 @@ class Korisnik
         ');
         $izraz->execute($korisnik);
 
-    }
-
-    
+    }    
 }

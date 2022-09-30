@@ -22,7 +22,7 @@ class KorisnikController extends AutorizacijaController
 
     public function promjena($sifra)
     {
-        if(!isset($_POST['naziv'])){
+        if(!isset($_POST['ime'])){
 
             $korisnik = Korisnik::readOne($sifra);
             if($korisnik==null){
@@ -78,8 +78,8 @@ class KorisnikController extends AutorizacijaController
 
     public function novi()
     {
-        if(!isset($_POST['naziv'])){
-            $this->pripremiSmjer();
+        if(!isset($_POST['ime'])){
+            $this->pripremiKorisnik();
             $this->view->render($this->phtmlDir . 'create',[
                 'korisnik'=>$this->korisnik,
                 'poruka'=>'Popunite sve podatke'
@@ -102,7 +102,7 @@ class KorisnikController extends AutorizacijaController
         
     }
     
-    private function pripremiSmjer()
+    private function pripremiKorisnik()
     {
         $this->korisnik=new stdClass();
         $this->korisnik->ime='';
