@@ -23,7 +23,7 @@ if($dev){
             'server'=>'localhost',
             'baza'=>'aurelije_rentacar',
             'korisnik'=>'aurelije_admin',
-            'lozinka'=>'a4R.DBh7Ezc]'
+            'lozinka'=>'s,zA(OEwW].u'
     ]
         ];
 }
