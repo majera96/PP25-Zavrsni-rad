@@ -1,0 +1,36 @@
+<a href="<?=App::config('url')?>rezervacija/nova"
+    class="success button expanded">Dodaj novu rezervaciju</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Ime i prezime korisnika</th>
+            <th>Broj vozačke</th>
+            <th>Grad poslovnice</th>
+            <th>Ulica i broj poslovnice</th>
+            <th>Proizvođač i model vozila</th>
+            <th>Cijena vozila</th>
+            <th>Datum preuzimanja</th>
+            <th>Datum povratka</th>
+            <th>Osiguranje</th>
+            <th>Promjena</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($entiteti as $e): ?>
+            <tr>
+                <td><?=$e->ime?> <?=$e->prezime?></td>
+                <td><?=$e->broj_vozacke?></td>
+                <td><?=$e->grad?></td>
+                <td><?=$e->naziv_ulice?> <?=$e->broj_ulice?></td>
+                <td><?=$e->proizvodac?> <?=$e->model?></td>
+                <td><?=$e->cijena?></td>
+                <td><?=$e->datum_preuzimanja?></td>
+                <td><?=$e->datum_povratka?></td>
+                <td><?=$e->osiguranje?></td>
+                <td><a href="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">Promjena</a> 
+                &nbsp;&nbsp;<a href="<?=App::config('url')?>rezervacija/brisanje/<?=$e->sifra?>">Brisanje</a></td>
+            </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>

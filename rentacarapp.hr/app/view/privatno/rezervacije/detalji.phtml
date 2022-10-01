@@ -1,0 +1,68 @@
+<form method="post" 
+action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
+  <h4 class="text-center">Detalji rezervacija</h4>
+  
+    <label>Ime
+    <input type="text" name="ime" value="<?=$e->ime?>" />
+  </label>
+
+  <label>Prezime
+    <input type="text" name="prezime" value="<?=$e->prezime?>" />
+  </label>
+
+  <label>Broj vozačke
+    <input type="email" name="broj_vozacke" value="<?=$e->broj_vozacke?>" />
+  </label>
+
+  <label>Grad poslovnice
+    <input type="text" name="grad" value="<?=$e->grad?>" />
+  </label>
+
+  <label>Ulica poslovnice
+    <input type="text" name="naziv_ulice" value="<?=$e->naziv_ulice?>" />
+  </label>
+
+  <label>Broj poslovnice
+    <input type="text" name="broj_ulice" value="<?=$e->broj_ulice?>" />
+  </label>
+
+  <label>Proizvođač vozila
+    <input type="text" name="proizvodac" value="<?=$e->proizvodac?>" />
+  </label>
+
+  <label>Model vozila
+    <input type="text" name="model" value="<?=$e->model?>" />
+  </label>
+
+  <label>Cijena
+    <input type="text" name="cijena" value="<?=$e->cijena?>" />
+  </label>
+
+  <label>Datum preuzimanja
+    <input type="text" name="datum_preuzimanja" value="<?=$e->datum_preuzimanja?>" />
+  </label>
+
+  <label>Datum povratka
+    <input type="text" name="datum_povratka" value="<?=$e->datum_povratka?>" />
+  </label>
+  
+  <label>Certificiran
+    <input type="checkbox" name="osiguranje" <?php 
+    if($e->osiguranje){
+        echo 'checked="checked"';
+    }
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>polaznik">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <input type="submit" class="button expanded" value="Spremi"></input>
+    </div>
+  </div>
+
+
+</form>
