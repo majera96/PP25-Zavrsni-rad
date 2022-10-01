@@ -1,30 +1,30 @@
 <form method="post" 
-action="<?=App::config('url')?>vozilo/promjena/<?=$v->sifra?>">
+action="<?=App::config('url')?>vozilo/promjena/<?=$e->sifra?>">
   <h4 class="text-center">Informacije o vozilima</h4>
   
   
   <label>Proizvođač vozila
-    <input type="text" name="proizvodac" value="<?=$v->proizvodac?>" />
+    <input type="text" name="proizvodac" value="<?=$e->proizvodac?>" />
   </label>
 
   <label>Model vozila
-    <input type="text" name="model" value="<?=$v->model?>" />
+    <input type="text" name="model" value="<?=$e->model?>" />
   </label>
 
   <label>Godište vozila
-    <input type="text" name="godiste" value="<?=$v->godiste?>" />
+    <input type="text" name="godiste" value="<?=$e->godiste?>" />
   </label>
 
   <label>Mjenjač
-    <input type="text" name="mjenjac" value="<?=$v->mjenjac?>" />
+    <input type="text" name="mjenjac" value="<?=$e->mjenjac?>" />
   </label>
 
   <label>Gorivo
-    <input type="text" name="gorivo" value="<?=$v->gorivo?>" />
+    <input type="text" name="gorivo" value="<?=$e->gorivo?>" />
   </label>
 
   <label>Opis vozila
-    <input type="text" name="opis" value="<?=$v->opis?>" />
+    <input type="text" name="opis" value="<?=$e->opis?>" />
   </label>
 
   <?=$poruka?>

@@ -48,14 +48,16 @@ class Vozilo
     public static function create($vozilo)
     {
         $veza = DB::getInstance();
+
         $izraz = $veza->prepare('
         
             insert into 
             vozilo(proizvodac,model,godiste,gorivo,mjenjac,opis)
-            values (:proizvodac,:model,:godiste,:gorivo,:mjenjac,:opis);
+            values (:proizvodac,:model,:godiste,:gorivo,:mjenjac,:opis)
         
         ');
         $izraz->execute($vozilo);
+        return $veza->lastInsertId();
     }
 
     // CRUD - U
@@ -69,7 +71,7 @@ class Vozilo
                 model=:model,
                 godiste=:godiste,
                 gorivo=:gorivo,
-                mjenjac=:mjenjac
+                mjenjac=:mjenjac,
                 opis=:opis
                 where sifra=:sifra
         

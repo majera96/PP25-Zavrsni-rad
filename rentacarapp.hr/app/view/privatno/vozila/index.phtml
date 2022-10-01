@@ -12,22 +12,23 @@
             <th>Mjenjač</th>
             <th>Gorivo</th>
             <th>Opis</th>
+            <th>Akcija</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach($vozilo as $v): ?>
+        <?php foreach($entiteti as $e): ?>
             <tr>
-                <td><?=$v->proizvodac?></td>
-                <td><?=$v->model?></td>
-                <td><?=$v->godiste?></td>
-                <td><?=$v->mjenjac?></td>
-                <td><?=$v->gorivo?></td>
-                <td><?=$v->opis?></td>
+                <td><?=$e->proizvodac?></td>
+                <td><?=$e->model?></td>
+                <td><?=$e->godiste?></td>
+                <td><?=$e->mjenjac?></td>
+                <td><?=$e->gorivo?></td>
+                <td><?=$e->opis?></td>
                 <td>
-                    <a href="<?=App::config('url')?>vozilo/promjena/<?=$v->sifra?>">Promjena
+                    <a href="<?=App::config('url')?>vozilo/promjena/<?=$e->sifra?>">Promjena
                      </a>
                     &nbsp;&nbsp;
-                     <a href="<?=App::config('url')?>vozilo/brisanje/<?=$v->sifra?>">Brisanje
+                     <a href="<?=App::config('url')?>vozilo/brisanje/<?=$e->sifra?>">Brisanje
                      </a>
                 </td>
             </tr>

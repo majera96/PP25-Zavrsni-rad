@@ -4,34 +4,27 @@
 <table>
     <thead>
         <tr>
-        <th>Ime</th>
-            <th>Prezime</th>
+            <th>Ime i prezime</th>
             <th>Email</th>
             <th>Broj mobitela</th>
             <th>Ime ulice</th>
             <th>Grad</th>
             <th>Država</th>
             <th>Broj vozačke</th>
+            <th>Akcija</th>
         </tr>
     </thead>
     <tbody>
     <?php foreach($korisnici as $k): ?>
             <tr>
-                <td><?=$k->ime?></td>
-                <td><?=$k->prezime?></td>
+                <td><?=$k->ime?> <?=$k->prezime?></td>
                 <td><?=$k->email?></td>
                 <td><?=$k->broj_mobitela?></td>
                 <td><?=$k->ime_ulice?></td>
                 <td><?=$k->grad?></td>
                 <td><?=$k->drzava?></td>
                 <td><?=$k->broj_vozacke?></td>
-                <td>
-                    <a href="<?=App::config('url')?>korisnik/promjena/<?=$k->sifra?>">Promjena
-                     </a>
-                    &nbsp;&nbsp;
-                     <a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">Brisanje
-                     </a>
-                </td>
+                <td><a href="<?=App::config('url')?>korisnik/promjena/<?=$k->sifra?>">Promjena</a> &nbsp;&nbsp;<a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">Brisanje</a></td>
             </tr>
         <?php endforeach;?>
     </tbody>

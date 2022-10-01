@@ -68,7 +68,7 @@ class Korisnik
             ime_ulice=:ime_ulice,
             grad=:grad,
             drzava=:drzava,
-            broj_vozacke=:brojvozacke
+            broj_vozacke=:broj_vozacke
             where sifra=:sifra
 
         ');

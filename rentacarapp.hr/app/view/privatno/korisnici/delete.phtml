@@ -1,5 +1,5 @@
 <form method="post" 
-action="<?=App::config('url')?>korisnik/delete/<?=$korisnik->sifra?>">
+action="<?=App::config('url')?>korisnik/brisanje/<?=$korisnik->sifra?>">
   <h4 class="text-center">Brisanje korisnika</h4>
   <label>Ime
     <input disabled="disabled" type="text" name="ime" value="<?=$korisnik->ime?>" />
@@ -30,7 +30,7 @@ action="<?=App::config('url')?>korisnik/delete/<?=$korisnik->sifra?>">
   </label>
 
   <label>Broj vozačke
-    <input disabled="disabled" type="text" name="broj_vozacke" value="<?=$korisnik->broj_vozacke?>" />
+    <input disabled="disabled" type="number" name="broj_vozacke" value="<?=$korisnik->broj_vozacke?>" />
   </label>
   <?=$poruka?>
 

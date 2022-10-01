@@ -50,11 +50,11 @@ class LokacijaController extends AutorizacijaController
         $this->entitet = (object) $_POST;
         $this->entitet->sifra=$sifra;
     
-        /*if($this->kontrola()){
+        if($this->kontrola()){
             Lokacija::update((array)$this->entitet);
             header('location: ' . App::config('url') . 'lokacija');
             return;
-        } */
+        }
 
         $this->view->render($this->phtmlDir . 'detalji',[
             'e'=>$this->entitet,
@@ -62,11 +62,13 @@ class LokacijaController extends AutorizacijaController
         ]);
     }
 
-  /*  private function kontrola()
+  private function kontrola()
     {
-        return $this->kontrolaIme() && $this->kontrolaPrezime()
-        && $this->kontrolaOib();
+        return true;
+
     }
+
+    /*
     private function kontrolaIme()
     {
         if(strlen($this->entitet->ime)===0){

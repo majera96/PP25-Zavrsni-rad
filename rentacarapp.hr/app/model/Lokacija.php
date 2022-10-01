@@ -40,6 +40,7 @@ class Lokacija
         
         ');
         $izraz->execute($lokacija);
+        return $veza->lastInsertId();
     }
 
     public static function update($lokacija)
