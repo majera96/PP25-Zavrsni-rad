@@ -66,6 +66,7 @@ class Korisnik
                 prezime=:prezime,
                 email=:email,
                 broj_mobitela=:broj_mobitela,
+                ime_ulice=:ime_ulice,
                 grad=:grad,
                 drzava=:drzava,
                 broj_vozacke=:broj_vozacke
