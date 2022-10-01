@@ -6,8 +6,7 @@
 <table>
     <thead>
         <tr>
-            <th>Naziv ulice</th>
-            <th>Broj ulice</th>
+            <th>Naziv i broj ulice</th>
             <th>Poštanski broj</th>
             <th>Grad</th>
             <th>Broj mobitela</th>
@@ -18,8 +17,7 @@
     <tbody>
         <?php foreach($entiteti as $e): ?>
             <tr>
-                <td><?=$e->naziv_ulice?></td>
-                <td><?=$e->broj_ulice?></td>
+                <td><?=$e->naziv_ulice?> <?=$e->broj_ulice?></td>
                 <td><?=$e->postanski_broj?></td>
                 <td><?=$e->grad?></td>
                 <td><?=$e->broj_mobitela?></td>

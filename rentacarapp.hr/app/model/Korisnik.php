@@ -2,7 +2,7 @@
 
 class Korisnik
 {
-    public static function  readOne($sifra)
+    public static function readOne($sifra)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
@@ -13,7 +13,7 @@ class Korisnik
         $izraz->execute([
             'sifra'=>$sifra
         ]);
-        return $izraz->fetch();
+        return $izraz->fetch(); 
     }
 
     public static function read()
@@ -21,11 +21,11 @@ class Korisnik
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-        select * from korisnik
+            select * from korisnik
         
-    ');
-    $izraz->execute();
-    return $izraz->fetchAll();
+        ');
+        $izraz->execute();
+        return $izraz->fetchAll();
     }
 
     public static function create($korisnik)
@@ -39,6 +39,7 @@ class Korisnik
         
         ');
         $izraz->execute($korisnik);
+        return $veza->lastInsertId();
     }
 
     public static function delete($sifra)
@@ -46,33 +47,32 @@ class Korisnik
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            delete from korisnik where sifra=:sifra
+           delete from korisnik where sifra=:sifra 
         
         ');
         $izraz->execute([
             'sifra'=>$sifra
         ]);
-    }
+        
+    }   
 
     public static function update($korisnik)
     {
-
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
             update korisnik set
-            ime=:ime,
-            prezime=:prezime,
-            email=:email,
-            broj_mobitela=:broj_mobitela,
-            ime_ulice=:ime_ulice,
-            grad=:grad,
-            drzava=:drzava,
-            broj_vozacke=:broj_vozacke
-            where sifra=:sifra
-
+                ime=:ime,
+                prezime=:prezime,
+                email=:email,
+                broj_mobitela=:broj_mobitela,
+                grad=:grad,
+                drzava=:drzava,
+                broj_vozacke=:broj_vozacke
+                where sifra=:sifra
+        
         ');
         $izraz->execute($korisnik);
+    }
 
-    }    
 }

@@ -7,122 +7,90 @@ class KorisnikController extends AutorizacijaController
         DIRECTORY_SEPARATOR . 'korisnici' .
         DIRECTORY_SEPARATOR;
 
-    private $korisnik=null;
+    private $entitet=null;
     private $poruka='';
 
     public function index()
     {
-
-        $korisnici = Korisnik::read();
-
-        $this->view->render($this->phtmlDir . 'read',[
-            'korisnici' => $korisnici
+        $this->view->render($this->phtmlDir . 'index',[
+            'entiteti'=>Korisnik::read()
         ]);
-    }
-
-    public function promjena($sifra)
-    {
-        if(!isset($_POST['ime'])){
-
-            $korisnik = Korisnik::readOne($sifra);
-            if($korisnik==null){
-                header('location: ' . App::config('url') . 'korisnik');
-            }
-
-            $this->view->render($this->phtmlDir . 'update',[
-                'korisnik' => $korisnik,
-                'poruka' => 'Promjenite podatke'
-            ]);
-            return;
-        }
-
-        $this->korisnik = (object) $_POST;
-        $this->korisnik->sifra=$sifra;
-
-        if($this->kontrolaPromjena()){
-            Korisnik::update((array)$this->korisnik);
-            header('location: ' . App::config('url') . 'korisnik');
-            return;
-        }
-
-        $this->view->render($this->phtmlDir . 'update',[
-            'korisnik'=>$this->korisnik,
-            'poruka'=>$this->poruka
-        ]);
-
-
-    }
-
-    public function brisanje($sifra)
-    {
-
-        $korisnik = Korisnik::readOne($sifra);
-        if($korisnik==null){
-            header('location: ' . App::config('url') . 'korisnik');
-        }
-
-        if(!isset($_POST['obrisi'])){
-            $this->view->render($this->phtmlDir . 'delete',[
-                'korisnik' => $korisnik,
-                'brisanje'=>Korisnik::brisanje($sifra),
-                'poruka' => 'Detalji korisnika za brisanje'
-            ]);
-            return;
-        }
-
-        Korisnik::delete($sifra);
-        header('location: ' . App::config('url') . 'korisnik');
-        
-
     }
 
     public function novi()
     {
+        $noviKorisnik = Korisnik::create([
+            'ime'=>'',
+            'prezime'=>'',
+            'email'=>'',
+            'broj_mobitela'=>'',
+            'ime_ulice'=>'',
+            'grad'=>'',
+            'drzava'=>'',
+            'broj_vozacke'=>''
+        ]);
+        header('location: ' . App::config('url') 
+                . 'korisnik/promjena/' . $noviKorisnik);
+    }
+    
+    public function promjena($sifra)
+    {
         if(!isset($_POST['ime'])){
-            $this->pripremiKorisnik();
-            $this->view->render($this->phtmlDir . 'create',[
-                'korisnik'=>$this->korisnik,
-                'poruka'=>'Popunite sve podatke'
+
+            $e = Korisnik::readOne($sifra);
+            if($e==null){
+                header('location: ' . App::config('url') . 'korisnik');
+            }
+
+            $this->view->render($this->phtmlDir . 'detalji',[
+                'e' => $e,
+                'poruka' => 'Unesite podatke'
             ]);
             return;
         }
-         
-        $this->korisnik = (object) $_POST;
+
+        $this->entitet = (object) $_POST;
+        $this->entitet->sifra=$sifra;
     
-      if($this->kontrolaNovi()){
-            Korisnik::create((array)$this->korisnik);
+        if($this->kontrola()){
+            Korisnik::update((array)$this->entitet);
             header('location: ' . App::config('url') . 'korisnik');
             return;
         }
 
-        $this->view->render($this->phtmlDir . 'create',[
-            'korisnik'=>$this->korisnik,
+        $this->view->render($this->phtmlDir . 'detalji',[
+            'e'=>$this->entitet,
             'poruka'=>$this->poruka
         ]);
+
+    }
+
+    private function kontrola()
+    {
+        return $this->kontrolirajIme() && $this->kontrolirajPrezime() && $this->kontrolirajDrzava();
+    }
         
-    }
-
-    public static function kontrolaNovi()
+    private function kontrolirajIme()
     {
         return true;
     }
 
-    public static function kontrolaPromjena()
+    private function kontrolirajPrezime()
     {
+
         return true;
     }
-    
-    private function pripremiKorisnik()
+
+    private function kontrolirajDrzava()
     {
-        $this->korisnik=new stdClass();
-        $this->korisnik->ime='';
-        $this->korisnik->prezime='';
-        $this->korisnik->email='';
-        $this->korisnik->broj_mobitela='';
-        $this->korisnik->ime_ulice='';
-        $this->korisnik->grad='';
-        $this->korisnik->drzava='';
-        $this->korisnik->broj_vozacke='';
+
+        return true;
+    }
+
+    public function brisanje($sifra)
+    {
+        Korisnik::delete($sifra);
+        header('location: ' . App::config('url') . 'korisnik');
     }
 
 }
