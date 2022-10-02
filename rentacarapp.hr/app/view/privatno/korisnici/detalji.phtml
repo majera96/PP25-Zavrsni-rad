@@ -26,8 +26,8 @@ action="<?=App::config('url')?>korisnik/promjena/<?=$e->sifra?>">
   </label>
 
   <label>Država
-    <input type="text" name="drzava" value="<?=$e->drzava?>" />
-  </label>
+  <?php require_once 'drzave.phtml'; ?>
+</label>
 
   <label>Broj vozačke
     <input type="number" name="broj_vozacke" value="<?=$e->broj_vozacke?>" />
