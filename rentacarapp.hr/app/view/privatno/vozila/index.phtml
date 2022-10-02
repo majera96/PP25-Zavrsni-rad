@@ -28,8 +28,8 @@
                     <a href="<?=App::config('url')?>vozilo/promjena/<?=$e->sifra?>">Promjena
                      </a>
                     &nbsp;&nbsp;
-                     <a href="<?=App::config('url')?>vozilo/brisanje/<?=$e->sifra?>">Brisanje
-                     </a>
+                    <a href="<?=App::config('url')?>vozilo/brisanje/<?=$e->sifra?>" 
+                        onclick="return confirm('Sigurno želite obrisati odabrano vozilo <?= $e->proizvodac . ' ' . $e->model ?>?');">Brisanje</a>
                 </td>
             </tr>
         <?php endforeach; ?>

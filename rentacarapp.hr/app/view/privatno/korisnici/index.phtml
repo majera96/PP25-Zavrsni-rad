@@ -25,7 +25,8 @@
                 <td><?=$e->drzava?></td>
                 <td><?=$e->broj_vozacke?></td>
                 <td><a href="<?=App::config('url')?>korisnik/promjena/<?=$e->sifra?>">Promjena</a> 
-                &nbsp;&nbsp;<a href="<?=App::config('url')?>korisnik/brisanje/<?=$e->sifra?>">Brisanje</a></td>
+                &nbsp;&nbsp;<a href="<?=App::config('url')?>korisnik/brisanje/<?=$e->sifra?>" 
+                        onclick="return confirm('Sigurno želite obrisati korisnika <?= $e->ime . ' ' . $e->prezime ?>?');">Brisanje</a>
             </tr>
         <?php endforeach;?>
     </tbody>

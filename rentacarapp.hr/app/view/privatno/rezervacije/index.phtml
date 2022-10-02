@@ -29,7 +29,8 @@
                 <td><?=$e->datum_povratka?></td>
                 <td><?=$e->osiguranje?></td>
                 <td><a href="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">Promjena</a> 
-                &nbsp;&nbsp;<a href="<?=App::config('url')?>rezervacija/brisanje/<?=$e->sifra?>">Brisanje</a></td>
+                &nbsp;&nbsp;<a href="<?=App::config('url')?>rezervacija/brisanje/<?=$e->sifra?>" 
+                        onclick="return confirm('Sigurno želite obrisati rezervaciju za korisnika <?= $e->ime . ' ' . $e->prezime ?>?');">Brisanje</a></td>
             </tr>
         <?php endforeach;?>
     </tbody>

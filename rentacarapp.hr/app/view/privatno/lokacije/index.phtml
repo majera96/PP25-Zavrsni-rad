@@ -26,8 +26,8 @@
                     <a href="<?=App::config('url')?>lokacija/promjena/<?=$e->sifra?>">Promjena
                      </a>
                     &nbsp;&nbsp;
-                     <a href="<?=App::config('url')?>lokacija/brisanje/<?=$e->sifra?>">Brisanje
-                     </a>
+                    <a href="<?=App::config('url')?>lokacija/brisanje/<?=$e->sifra?>" 
+                        onclick="return confirm('Sigurno želite obrisati odabranu poslovnicu <?= $e->ime_ulice . ' ' . $e->broj_ulice ?>?');">Brisanje</a>
                 </td>
             </tr>
         <?php endforeach; ?>
