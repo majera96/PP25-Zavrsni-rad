@@ -63,18 +63,85 @@ class Rezervacija
     // CRUD - C
     public static function create($p)
 {
-    // pokusavam skuziti
+    $veza = DB::getInstance();
+    $veza->beginTransaction();
+    $izraz = $veza->prepare('
+    
+    insert into 
+    vozilo(proizvodac,model,godiste,gorivo,mjenjac,opis)
+    values (:proizvodac,:model,:godiste,:gorivo,:mjenjac,:opis)
+
+    ');
+    $izraz->execute([
+        'proizvodac'=>$p['proizvodac'],
+        'model'=>$p['model'],
+        'godiste'=>$p['godiste'],
+        'gorivo'=>$p['gorivo'],
+        'mjenjac'=>$p['mjenjac'],
+        'opis'=>$p['opis']
+    ]);
+    $sifraVozila = $veza->lastInsertId();
+
+    $izraz = $veza->prepare('
+    
+    insert into 
+    korisnik(ime,prezime,email,broj_mobitela,ime_ulice,grad,drzava,broj_vozacke)
+    values(:ime,:prezime,:email,:broj_mobitela,:ime_ulice,:grad,:drzava,:broj_vozacke)
+
+    ');
+    $izraz->execute([
+        'ime'=>$p['ime'],
+        'prezime'=>$p['prezime'],
+        'email'=>$p['email'],
+        'broj_mobitela'=>$p['broj_mobitela'],
+        'ime_ulice'=>$p['ime_ulice'],
+        'grad'=>$p['grad'],
+        'drzava'=>$p['drzava'],
+        'broj_vozacke'=>$p['broj_vozacke']
+    ]);
+    $sifraKorisnika = $veza->lastInsertId();
+
+    $izraz = $veza->prepare('
+    
+    insert into 
+    lokacija(naziv_ulice,broj_ulice,postanski_broj,grad,broj_mobitela,email)
+    values (:naziv_ulice,:broj_ulice,:postanski_broj,:grad,:broj_mobitela,:email)
+
+    ');
+    $izraz->execute([
+        'naziv_ulice'=>$p['naziv_ulice'],
+        'broj_ulice'=>$p['broj_ulice'],
+        'postanski_broj'=>$p['postanski_broj'],
+        'grad'=>$p['grad'],
+        'broj_mobitela'=>$p['broj_mobitela'],
+        'email'=>$p['email']
+    ]);
+    $sifraLokacije = $veza->lastInsertId();
+
+    $izraz = $veza->prepare('
+        insert into
+        rezervacija(vozilo,cijena,lokacija,datum_preuzimanja,datum_povratka,korisnik,osiguranje)
+        values(:vozio,:cijena,:lokacija,:datum_preuzimanja,:datum_povratka,:korisnik,:osiguranje)
+    ');
+    $izraz->execute([
+        'vozilo'=>$sifraVozila,
+        'cijena'=>$p['cijena'],
+        'lokacija'=>$sifraLokacija,
+        'datum_preuzimanja'=>$p['datum_preuzimanja'],
+        'datum_povratka'=>$p['datum_povratka'],
+        'korisnik'=>$sifraKorisnik,
+        'osiguranje'=>$p['osiguranje'],
+    ]);
+    $sifraRezervacija = $veza->lastInsertId();
+    $veza->commit();
+    return $sifraRezervacija;
 }
+
     // CRUD - U
-    public static function update($vozilo)
+    public static function update($p)
     {
 // uskoro
     }
 
-     // CRUD - D
-    public static function delete($sifra)
-    {
-//uskoro
-    }
 }
 
