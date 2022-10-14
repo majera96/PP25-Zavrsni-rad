@@ -66,6 +66,8 @@ class RezervacijaController extends AutorizacijaController
 
     }
 
+    
+
     private function kontrola()
     {
         return $this->kontrolirajVozilo() && $this->kontrolirajLokaciju() && $this->kontrolirajOsiguranje();
