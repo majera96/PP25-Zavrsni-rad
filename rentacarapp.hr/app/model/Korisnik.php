@@ -76,4 +76,20 @@ class Korisnik
         $izraz->execute($korisnik);
     }
 
+    public static function getPostojeciBrojeviVozacke()
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+            select broj_vozacke from korisnik where broj_vozacke is not null
+        ');
+        $izraz->execute();
+        $postojeciBrojeviVozacki = $izraz->fetchAll();
+
+        foreach ($postojeciBrojeviVozacki as $o) {
+            $nizPostojecihBrojevaVozacki[] = $o->broj_vozacke;
+        }
+
+        return $nizPostojecihBrojevaVozacki;
+    }
+
 }

@@ -65,7 +65,7 @@ class VoziloController extends AutorizacijaController
 
     private function kontrola()
     {
-        return $this->kontrolirajProizvodac() && $this->kontrolirajGodiste() && $this->kontrolirajModel() $$ $this->kontrolirajOpis();
+        return $this->kontrolirajProizvodac() && $this->kontrolirajGodiste() && $this->kontrolirajModel() && $this->kontrolirajOpis();
     }
         
     private function kontrolirajProizvodac()

@@ -62,30 +62,59 @@ class LokacijaController extends AutorizacijaController
         ]);
     }
 
-  private function kontrola()
+    private function kontrola()
     {
-        return true;
-
+        return $this->kontrolirajNazivulice() && $this->kontrolirajBrojulice() && $this->kontrolirajGrad() && $this->kontrolirajKontakt();
     }
-
-    /*
-    private function kontrolaIme()
+        
+    private function kontrolirajNazivulice()
     {
-        if(strlen($this->entitet->ime)===0){
-            $this->poruka = 'Ime obavezno';
+        $this->entitet->naziv_ulice = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->naziv_ulice))));
+
+        if ($this->entitet->naziv_ulice == '') {
+            $this->poruka = 'Naziv ulice je obavezan';
             return false;
         }
         return true;
     }
-    private function kontrolaPrezime()
+
+    private function kontrolirajBrojulice()
     {
-        if(strlen($this->entitet->prezime)===0){
-            $this->poruka = 'Prezime obavezno';
+        $this->entitet->broj_ulice = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->broj_ulice))));
+
+        if ($this->entitet->broj_ulice == '') {
+            $this->poruka = 'Broj ulice je obavezan';
             return false;
         }
+
         return true;
     }
-*/
+
+    private function kontrolirajGrad()
+    {
+
+        $this->entitet->grad = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->grad))));
+
+        if ($this->entitet->grad == '') {
+            $this->poruka = 'Grad je obavezan';
+            return false;
+        }
+
+        return true;
+
+    }
+
+    private function kontrolirajKontakt()
+    {
+        $this->entitet->email = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->email))));
+
+        if ($this->entitet->email == '') {
+            $this->poruka = 'Kontakt mail je obavezan';
+            return false;
+        }
+
+        return true;
+    }
 
     public function brisanje($sifra)
     {

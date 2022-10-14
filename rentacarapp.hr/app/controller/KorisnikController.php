@@ -67,22 +67,76 @@ class KorisnikController extends AutorizacijaController
 
     private function kontrola()
     {
-        return $this->kontrolirajIme() && $this->kontrolirajPrezime() && $this->kontrolirajDrzava();
+        return $this->kontrolirajIme() && $this->kontrolirajPrezime() && $this->kontrolirajDrzava() && $this->kontrolirajKontakt()&& $this->kontrolirajBrojVozacke();
     }
         
     private function kontrolirajIme()
     {
+        $this->entitet->ime = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->ime))));
+
+        if ($this->entitet->ime == '') {
+            $this->poruka = 'Ime korisnika obavezno';
+            return false;
+        }
         return true;
     }
 
     private function kontrolirajPrezime()
     {
+        $this->entitet->prezime = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->prezime))));
+
+        if($this->entitet->prezime == '') {
+            $this->poruka = 'Prezime korisnika obavezno';
+            return false;
+        }
 
         return true;
     }
 
     private function kontrolirajDrzava()
     {
+
+        $this->entitet->drzava = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->drzava))));
+
+        if($this->entitet->drzava == '') {
+            $this->poruka = 'Odaberite državu';
+            return false;
+        }
+
+        return true;
+
+    }
+
+    private function kontrolirajKontakt()
+    {
+        $this->entitet->email = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->email))));
+
+        if($this->entitet->email == '') {
+            $this->poruka = 'Kontakt mail je obavezan';
+            return false;
+        }
+
+        return true;
+    }
+
+    private function kontrolirajBrojVozacke($promjenaUnosa = false)
+    {
+        $this->entitet->broj_vozacke = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->broj_vozacke))));
+
+        if($this->entitet->drzava !== 'Croatia') {
+            if($this->entitet->broj_vozacke == '') {
+                $this->poruka = 'Broj vozačke je obavezan za strane državljane';
+                return false;
+            }
+
+            $postojeciBrojeviVozacke = Korisnik::getPostojeciBrojeviVozacke();
+            if(in_array($this->entitet->broj_vozacke, $postojeciBrojeviVozacke)) {
+                if (!$promjenaUnosa) {
+                    $this->poruka = 'Broj vozačke već postoji';
+                    return false;
+                }
+            }
+        }
 
         return true;
     }
