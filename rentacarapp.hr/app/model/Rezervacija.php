@@ -137,7 +137,6 @@ class Rezervacija
     return $sifraRezervacija;
 }
 
-    // CRUD - U
     public static function update($p)
     {
 // uskoro
