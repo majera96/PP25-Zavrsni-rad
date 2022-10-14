@@ -6,8 +6,7 @@
 <table>
     <thead>
         <tr>
-            <th>Proizvođač vozila</th>
-            <th>Model vozila</th>
+            <th>Proizvođač i model vozila</th>
             <th>Godište vozila</th>
             <th>Mjenjač</th>
             <th>Gorivo</th>
@@ -18,8 +17,7 @@
     <tbody>
         <?php foreach($entiteti as $e): ?>
             <tr>
-                <td><?=$e->proizvodac?></td>
-                <td><?=$e->model?></td>
+                <td><?=$e->proizvodac?> <?=$e->model?></td>
                 <td><?=$e->godiste?></td>
                 <td><?=$e->mjenjac?></td>
                 <td><?=$e->gorivo?></td>
