@@ -30,7 +30,7 @@ action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
         <select name="vozilo" id="vozilo">
             <?php foreach($vozila as $v): ?>
                 <option
-                <?php if($e->vozila == $v->sifra){
+                <?php if($e->vozilo == $v->sifra){
                     echo ' selected=="selected"';
                 }
                 ?>
