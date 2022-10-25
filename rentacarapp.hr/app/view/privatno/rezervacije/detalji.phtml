@@ -2,37 +2,41 @@
 action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
   <h4 class="text-center">Detalji rezervacija</h4>
   
-    <label>Ime
-    <input type="text" name="ime" value="<?=$e->ime?>" />
-  </label>
+<label>Korisnik</label>
+        <select name="korisnik" id="korisnik">
+            <?php foreach($korisnici as $k): ?>
+                <option
+                <?php if($e->korisnik == $k->sifra){
+                    echo ' selected=="selected"';
+                }
+                ?>
+                value="<?=$k->sifra?>"><?=$k->ime?> <?=$k->prezime?> <?=$k->broj_vozacke?></option>
+            <?php endforeach; ?>
+        </select>
 
-  <label>Prezime
-    <input type="text" name="prezime" value="<?=$e->prezime?>" />
-  </label>
+  <label>Poslovnica</label>
+        <select name="lokacija" id="lokacija">
+            <?php foreach($lokacije as $l): ?>
+                <option
+                <?php if($e->lokacija == $l->sifra){
+                    echo ' selected=="selected"';
+                }
+                ?>
+                value="<?=$l->sifra?>"><?=$l->grad?> <?=$l->naziv_ulice?> <?=$l->broj_ulice?></option>
+            <?php endforeach; ?>
+        </select>
 
-  <label>Broj vozačke
-    <input type="text" name="broj_vozacke" value="<?=$e->broj_vozacke?>" />
-  </label>
-
-  <label>Grad poslovnice
-    <input type="text" name="grad" value="<?=$e->grad?>" />
-  </label>
-
-  <label>Ulica poslovnice
-    <input type="text" name="naziv_ulice" value="<?=$e->naziv_ulice?>" />
-  </label>
-
-  <label>Broj poslovnice
-    <input type="text" name="broj_ulice" value="<?=$e->broj_ulice?>" />
-  </label>
-
-  <label>Proizvođač vozila
-    <input type="text" name="proizvodac" value="<?=$e->proizvodac?>" />
-  </label>
-
-  <label>Model vozila
-    <input type="text" name="model" value="<?=$e->model?>" />
-  </label>
+        <label>Vozilo</label>
+        <select name="vozilo" id="vozilo">
+            <?php foreach($vozila as $v): ?>
+                <option
+                <?php if($e->vozila == $v->sifra){
+                    echo ' selected=="selected"';
+                }
+                ?>
+                value="<?=$v->sifra?>"><?=$v->proizvodac?> <?=$v->model?></option>
+            <?php endforeach; ?>
+        </select>
 
   <label>Cijena
     <input type="text" name="cijena" value="<?=$e->cijena?>" />
@@ -46,7 +50,7 @@ action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
     <input type="text" name="datum_povratka" value="<?=$e->datum_povratka?>" />
   </label>
   
-  <label>Certificiran
+  <label>Certificiran</label>
     <input type="checkbox" name="osiguranje" <?php 
     if($e->osiguranje){
         echo 'checked="checked"';
@@ -56,15 +60,14 @@ action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
 
   <?=$poruka?>
 
-  <div class="grid-x grid-padding-x">
+<div class="grid-x grid-padding-x">
     <div class="large-6 cell">
         <a class="alert button expanded" 
-            href="<?=App::config('url')?>rezervacija">Odustani</a>
+            href="<?=App::config('url')?>narudzba">Odustani</a>
     </div>
     <div class="large-6 cell">
         <input type="submit" class="button expanded" value="Spremi"></input>
     </div>
-  </div>
-
+</div>
 
 </form>
