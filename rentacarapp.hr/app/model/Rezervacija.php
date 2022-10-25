@@ -71,7 +71,7 @@ $izraz = $veza->prepare('
         
     insert into
     rezervacija(vozilo,cijena,lokacija,datum_preuzimanja,datum_povratka,korisnik,osiguranje)
-    values(:vozio,:cijena,:lokacija,:datum_preuzimanja,:datum_povratka,:korisnik,:osiguranje)
+    values(:vozilo,:cijena,:lokacija,:datum_preuzimanja,:datum_povratka,:korisnik,:osiguranje)
 ');
 $izraz->execute(
 [
@@ -84,9 +84,8 @@ $izraz->execute(
     'osiguranje'=>$p['osiguranje']
 ]);
 
-$sifraRezervacija = $veza->lastInsertId();
-$veza->commit();
-return $sifraRezervacija;
+return $veza->lastInsertId();
+ 
 }
 
     public static function update($p)
@@ -108,6 +107,20 @@ $izraz = $veza->prepare('
     where sifra=:sifra
 
 ');
-$izraz->execute($p);
+$izraz->execute(
+[
+    'vozilo'=>$p['vozilo'],
+    'cijena'=>$p['cijena'],
+    'lokacija'=>$p['lokacija'],
+    'datum_preuzimanja'=>$p['datum_preuzimanja'],
+    'datum_povratka'=>$p['datum_povratka'],
+    'korisnik'=>$p['korisnik'],
+    'osiguranje'=>$p['osiguranje'],
+    'sifra'=>$p['sifra']
+]);
+
+$veza->commit();
+
 }
+
 }
