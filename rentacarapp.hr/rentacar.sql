@@ -26,12 +26,12 @@ create table vozilo(
 
 create table rezervacija(
     sifra int not null primary key auto_increment,
-    vozilo int not null,
+    vozilo int null,
     cijena decimal(18,2),
-    lokacija int not null,
+    lokacija int null,
     datum_preuzimanja datetime,
     datum_povratka datetime,
-    korisnik int not null,
+    korisnik int null,
     osiguranje boolean
 );
 

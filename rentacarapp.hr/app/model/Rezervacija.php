@@ -65,50 +65,7 @@ class Rezervacija
 {
     $veza = DB::getInstance();
     $veza->beginTransaction();
-    //Vozilo
-    $izraz = $veza->prepare('
-    
-        select sifra from vozilo
-        where proizvodac=:proizvodac and model=:model
-    
-    ');
-    $izraz->execute(
-        [
-            'proizvodac'=>$p['proizvodac'],
-            'model'=>$p['model']
-        ]
-    );
-    $sifraVozilo = $izraz->fetchColumn();
-    // Lokacija
-    $izraz = $veza->prepare('
-    
-        select sifra from lokacija
-        where grad=:grad,naziv_ulice=:naziv_ulice and broj_ulice=:broj_ulice
-    
-    ');
-    $izraz->execute(
-        [
-            'grad'=>$p['grad'],
-            'naziv_ulice'=>$p['naziv_ulice'],
-            'broj_ulice'=>$p['broj_ulice']
-        ]
-    );
-    $sifraLokacija = $izraz->fetchColumn();
-    // Korisnik
-    $izraz = $veza->prepare('
-    
-    select sifra from korisnik
-    where ime=:ime,prezime=:prezime and broj_vozacke=:broj_vozacke
 
-');
-$izraz->execute(
-    [
-        'ime'=>$p['ime'],
-        'prezime'=>$p['prezime'],
-        'broj_vozacke'=>$p['broj_vozacke']
-    ]
-);
-$sifraKorisnik = $izraz->fetchColumn();
 // Rezervacija
 $izraz = $veza->prepare('
         
@@ -118,13 +75,13 @@ $izraz = $veza->prepare('
 ');
 $izraz->execute(
 [
-    'vozilo'=>$sifraVozilo,
+    'vozilo'=>$p['vozilo'],
     'cijena'=>$p['cijena'],
-    'lokacija'=>$sifraLokacija,
+    'lokacija'=>$p['lokacija'],
     'datum_preuzimanja'=>$p['datum_preuzimanja'],
     'datum_povratka'=>$p['datum_povratka'],
-    'korisnik'=>$sifraKorisnik,
-    'osiguranje'=>$p['osiguranje'],
+    'korisnik'=>$p['korisnik'],
+    'osiguranje'=>$p['osiguranje']
 ]);
 
 $sifraRezervacija = $veza->lastInsertId();
@@ -137,50 +94,6 @@ return $sifraRezervacija;
         $veza = DB::getInstance();
         $veza->beginTransaction();
 
-    //Vozilo
-    $izraz = $veza->prepare('
-    
-        select sifra from vozilo
-        where proizvodac=:proizvodac and model=:model;
-    
-    ');
-    $izraz->execute(
-        [
-            'proizvodac'=>$p['proizvodac'],
-            'model'=>$p['model']
-        ]
-    );
-    $sifraVozilo = $izraz->fetchColumn();
-    // Lokacija
-    $izraz = $veza->prepare('
-    
-        select sifra from lokacija
-        where grad=:grad,naziv_ulice=:naziv_ulice and broj_ulice=:broj_ulice;
-    
-    ');
-    $izraz->execute(
-        [
-            'grad'=>$p['grad'],
-            'naziv_ulice'=>$p['naziv_ulice'],
-            'broj_ulice'=>$p['broj_ulice']
-        ]
-    );
-    $sifraLokacija = $izraz->fetchColumn();
-    // Korisnik
-    $izraz = $veza->prepare('
-    
-    select sifra from korisnik
-    where ime=:ime,prezime=:prezime and broj_vozacke=:broj_vozacke;
-
-');
-$izraz->execute(
-    [
-        'ime'=>$p['ime'],
-        'prezime'=>$p['prezime'],
-        'broj_vozacke'=>$p['broj_vozacke']
-    ]
-);
-$sifraKorisnik = $izraz->fetchColumn();
 // Rezervacija
 $izraz = $veza->prepare('
         
@@ -195,20 +108,6 @@ $izraz = $veza->prepare('
     where sifra=:sifra
 
 ');
-$izraz->execute(
-[
-    'vozilo'=>$sifraVozilo,
-    'cijena'=>$p['cijena'],
-    'lokacija'=>$sifraLokacija,
-    'datum_preuzimanja'=>$p['datum_preuzimanja'],
-    'datum_povratka'=>$p['datum_povratka'],
-    'korisnik'=>$sifraKorisnik,
-    'osiguranje'=>$p['osiguranje'],
-    'sifra'=>$p['sifra']
-]);
-
-$veza->commit();
-
+$izraz->execute($p);
 }
-
 }

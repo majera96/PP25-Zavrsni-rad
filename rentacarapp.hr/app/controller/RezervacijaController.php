@@ -21,12 +21,12 @@ class RezervacijaController extends AutorizacijaController
     public function nova()
     {
         $novaRezervacija = Rezervacija::create([
-            'vozilo'=>'',
+            'vozilo'=>1,
             'cijena'=>'',
-            'lokacija'=>'',
+            'lokacija'=>1,
             'datum_preuzimanja'=>'',
             'datum_povratka'=>'',
-            'korisnik'=>'',
+            'korisnik'=>1,
             'osiguranje'=>''
         ]);
         header('location: ' . App::config('url') 
