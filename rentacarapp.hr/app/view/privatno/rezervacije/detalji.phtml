@@ -1,7 +1,6 @@
-<form method="post" 
-action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
+<form method="post" action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
   <h4 class="text-center">Detalji rezervacija</h4>
-  
+
 <label>Korisnik</label>
         <select name="korisnik" id="korisnik">
             <?php foreach($korisnici as $k): ?>
@@ -63,7 +62,7 @@ action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
 <div class="grid-x grid-padding-x">
     <div class="large-6 cell">
         <a class="alert button expanded" 
-            href="<?=App::config('url')?>narudzba">Odustani</a>
+            href="<?=App::config('url')?>rezervacija">Odustani</a>
     </div>
     <div class="large-6 cell">
         <input type="submit" class="button expanded" value="Spremi"></input>

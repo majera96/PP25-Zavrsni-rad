@@ -24,17 +24,6 @@ create table vozilo(
     opis varchar(200)
     );
 
-create table rezervacija(
-    sifra int not null primary key auto_increment,
-    vozilo int null,
-    cijena decimal(18,2),
-    lokacija int null,
-    datum_preuzimanja datetime,
-    datum_povratka datetime,
-    korisnik int null,
-    osiguranje boolean
-);
-
 create table lokacija(
     sifra int not null primary key auto_increment,
     naziv_ulice varchar(50),
@@ -61,6 +50,17 @@ create table slikavozila(
     sifra int not null primary key auto_increment,
     vozilo int not null,
     putanja int not null
+);
+
+create table rezervacija(
+    sifra int not null primary key auto_increment,
+    vozilo int not null,
+    lokacija int not null,
+    korisnik int not null,
+    cijena decimal(18,2),
+    datum_preuzimanja datetime,
+    datum_povratka datetime,
+    osiguranje boolean
 );
 
 alter table rezervacija add foreign key (vozilo) references vozilo(sifra);

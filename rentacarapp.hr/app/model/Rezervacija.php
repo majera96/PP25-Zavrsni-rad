@@ -21,7 +21,7 @@ class Rezervacija
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
-        select a.sifra,e.ime,e.prezime,e.broj_vozacke,c.grad, c.naziv_ulice ,b.proizvodac ,b.model, a.cijena ,a.datum_preuzimanja,a.datum_povratka ,a.osiguranje 
+        select a.*, e.ime,e.prezime,e.broj_vozacke,c.grad, c.naziv_ulice ,b.proizvodac ,b.model, a.cijena ,a.datum_preuzimanja,a.datum_povratka ,a.osiguranje 
         from rezervacija a inner join vozilo b 
         on a.vozilo = b.sifra
         inner join lokacija c 
@@ -64,15 +64,13 @@ class Rezervacija
     public static function create($p)
 {
     $veza = DB::getInstance();
-    $veza->beginTransaction();
 
 // Rezervacija
-$izraz = $veza->prepare('
-        
+$izraz = $veza->prepare(' 
     insert into
-    rezervacija(vozilo,cijena,lokacija,datum_preuzimanja,datum_povratka,korisnik,osiguranje)
-    values(:vozilo,:cijena,:lokacija,:datum_preuzimanja,:datum_povratka,:korisnik,:osiguranje)
-');
+    rezervacija(vozilo,lokacija,korisnik,cijena,datum_preuzimanja,datum_povratka,osiguranje)
+    values(:vozilo,:lokacija,:korisnik,:cijena,:datum_preuzimanja,:datum_povratka,:osiguranje)');
+
 $izraz->execute(
 [
     'vozilo'=>$p['vozilo'],
@@ -85,7 +83,6 @@ $izraz->execute(
 ]);
 
 return $veza->lastInsertId();
- 
 }
 
     public static function update($p)

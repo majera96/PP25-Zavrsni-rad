@@ -21,27 +21,29 @@ class RezervacijaController extends AutorizacijaController
     public function nova()
     {
         $novaRezervacija = Rezervacija::create([
-            'vozilo'=>1,
+            'vozilo'=>12,
+            'korisnik'=>6,
+            'lokacija'=>2,
             'cijena'=>'',
-            'lokacija'=>1,
             'datum_preuzimanja'=>'',
             'datum_povratka'=>'',
-            'korisnik'=>1,
-            'osiguranje'=>''
+            'osiguranje'=>1
         ]);
+
         header('location: ' . App::config('url') 
                 . 'rezervacija/promjena/' . $novaRezervacija);
     }
     
     public function promjena($sifra)
     {
-
         $korisnici = $this->ucitajKorisnike();
+        
         $lokacije = $this->ucitajLokacije();
+
         $vozila = $this->ucitajVozila();
 
         if(!isset($_POST['vozilo'])){
-
+            
             $e = Rezervacija::readOne($sifra);
             if($e==null){
                 header('location: ' . App::config('url') . 'rezervacija');
@@ -118,6 +120,7 @@ class RezervacijaController extends AutorizacijaController
         $k->sifra = 0;
         $k->ime = 'Odaberi';
         $k->prezime = 'korisnika';
+        $k->broj_vozacke = '';
         $korisnici[] = $k;
         foreach(Korisnik::read() as $korisnik){
             $korisnici[]=$korisnik;
