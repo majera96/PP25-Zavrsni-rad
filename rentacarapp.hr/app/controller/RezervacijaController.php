@@ -20,21 +20,10 @@ class RezervacijaController extends AutorizacijaController
 
     public function nova()
     {
-        $novaRezervacija = Rezervacija::create([
-            'vozilo'=>12,
-            'korisnik'=>6,
-            'lokacija'=>2,
-            'cijena'=>'',
-            'datum_preuzimanja'=>'',
-            'datum_povratka'=>'',
-            'osiguranje'=>1
-        ]);
-
-        header('location: ' . App::config('url') 
-                . 'rezervacija/promjena/' . $novaRezervacija);
+        header('location: ' . App::config('url') . 'rezervacija/promjena/');
     }
     
-    public function promjena($sifra)
+    public function promjena($sifra = false)
     {
         $korisnici = $this->ucitajKorisnike();
         
@@ -42,28 +31,44 @@ class RezervacijaController extends AutorizacijaController
 
         $vozila = $this->ucitajVozila();
 
-        if(!isset($_POST['vozilo'])){
-            
-            $e = Rezervacija::readOne($sifra);
-            if($e==null){
-                header('location: ' . App::config('url') . 'rezervacija');
-            }
+        if (isset($_POST['nova']) && $_POST['nova'] === '1' ) {
+            Rezervacija::create($_POST);
+            header('location: ' . App::config('url') . 'rezervacija');
+            return;
+        }
 
-            $this->detalji($e,$korisnici,$lokacije,$vozila,'Unesite podatke');
+        if(!$sifra){
+            //prazna forma
+            $this->detalji(false,$korisnici,$lokacije,$vozila,'Unesite podatke');
             return;
         }
 
         $this->entitet = (object) $_POST;
         $this->entitet->osiguranje = isset($_POST['osiguranje']);
         $this->entitet->sifra=$sifra;
-
+        
+        /*
         if($this->kontrola()){
             Rezervacija::update((array)$this->entitet);
             header('location: ' . App::config('url') . 'rezervacija');
             return;
         }
+        */
+    
+        $entitet = Rezervacija::readOne($sifra);
 
-        $this->detalji($this->entitet,$korisnici,$lokacije,$vozila,$this->poruka);
+        if (!$entitet instanceof stdClass || $entitet->sifra != true) {
+            header('location: ' . App::config('url') . 'rezervacija');
+        }
+
+        if (isset($_POST['nova']) && $_POST['nova'] === '0' ) {
+            $_POST['sifra'] = $sifra;
+            Rezervacija::update($_POST);
+            header('location: ' . App::config('url') . 'rezervacija');
+            return;
+        }
+
+        $this->detalji($entitet,$korisnici,$lokacije,$vozila,$this->poruka);
     }
 
     private function detalji($e,$korisnici,$lokacije,$vozila,$poruka)
@@ -135,6 +140,7 @@ class RezervacijaController extends AutorizacijaController
         $l->sifra = 0;
         $l->grad = 'Odaberi';
         $l->naziv_ulice = 'poslovnicu';
+        $l->broj_ulice = '';
         $lokacije[] = $l;
         foreach(Lokacija::read() as $lokacija){
             $lokacije[]=$lokacija;
@@ -145,7 +151,7 @@ class RezervacijaController extends AutorizacijaController
 
     public function brisanje($sifra)
     {
-        Rezervacija::delete($sifra);
+        Rezervacija::brisanje($sifra);
         header('location: ' . App::config('url') . 'rezervacija');
     }
 

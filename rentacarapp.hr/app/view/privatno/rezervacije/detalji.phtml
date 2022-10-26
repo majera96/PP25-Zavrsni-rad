@@ -1,11 +1,14 @@
-<form method="post" action="<?=App::config('url')?>rezervacija/promjena/<?=$e->sifra?>">
+<?php
+    $sifra = $e ? $e->sifra : ''; 
+?>
+<form method="post" action="<?=App::config('url')?>rezervacija/promjena/<?= $sifra?>">
   <h4 class="text-center">Detalji rezervacija</h4>
 
 <label>Korisnik</label>
         <select name="korisnik" id="korisnik">
             <?php foreach($korisnici as $k): ?>
                 <option
-                <?php if($e->korisnik == $k->sifra){
+                <?php if($e instanceof stdClass && $e->korisnik == $k->sifra){
                     echo ' selected=="selected"';
                 }
                 ?>
@@ -17,7 +20,7 @@
         <select name="lokacija" id="lokacija">
             <?php foreach($lokacije as $l): ?>
                 <option
-                <?php if($e->lokacija == $l->sifra){
+                <?php if($e instanceof stdClass && $e->lokacija == $l->sifra){
                     echo ' selected=="selected"';
                 }
                 ?>
@@ -29,7 +32,7 @@
         <select name="vozilo" id="vozilo">
             <?php foreach($vozila as $v): ?>
                 <option
-                <?php if($e->vozilo == $v->sifra){
+                <?php if($e instanceof stdClass && $e->vozilo == $v->sifra){
                     echo ' selected=="selected"';
                 }
                 ?>
@@ -38,20 +41,22 @@
         </select>
 
   <label>Cijena
-    <input type="text" name="cijena" value="<?=$e->cijena?>" />
+    <input type="text" name="cijena" value="<?=($e instanceof stdClass) ? $e->cijena : 0.5?>" />
   </label>
 
   <label>Datum preuzimanja
-    <input type="date" name="datum_preuzimanja" value="<?=$e->datum_preuzimanja?>" />
+    <input type="date" name="datum_preuzimanja" value="<?=($e instanceof stdClass) ? $e->datum_preuzimanja : ''?>" />
   </label>
 
   <label>Datum povratka
-    <input type="date" name="datum_povratka" value="<?=$e->datum_povratka?>" />
+    <input type="date" name="datum_povratka" value="<?=($e instanceof stdClass) ? $e->datum_povratka : ''?>" />
   </label>
+
+  <input type="hidden" name="nova" value="<?=($e instanceof stdClass) ? 0 : 1 ?>" />
   
-  <label>Certificiran</label>
+  <label>Osiguranje</label>
     <input type="checkbox" name="osiguranje" <?php 
-    if($e->osiguranje){
+    if($e instanceof stdClass && $e->osiguranje){
         echo 'checked="checked"';
     }
 

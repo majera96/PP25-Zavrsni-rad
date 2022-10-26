@@ -34,6 +34,7 @@ class Rezervacija
         $izraz->execute([
             'sifra'=>$sifra
         ]);
+         
         return $izraz->fetch(); 
     }
 
@@ -79,7 +80,7 @@ $izraz->execute(
     'datum_preuzimanja'=>$p['datum_preuzimanja'],
     'datum_povratka'=>$p['datum_povratka'],
     'korisnik'=>$p['korisnik'],
-    'osiguranje'=>$p['osiguranje']
+    'osiguranje'=>$p['osiguranje'] ?? 0,
 ]);
 
 return $veza->lastInsertId();
@@ -88,7 +89,7 @@ return $veza->lastInsertId();
     public static function update($p)
     {
         $veza = DB::getInstance();
-        $veza->beginTransaction();
+       // $veza->beginTransaction();
 
 // Rezervacija
 $izraz = $veza->prepare('
@@ -104,6 +105,7 @@ $izraz = $veza->prepare('
     where sifra=:sifra
 
 ');
+
 $izraz->execute(
 [
     'vozilo'=>$p['vozilo'],
@@ -112,11 +114,11 @@ $izraz->execute(
     'datum_preuzimanja'=>$p['datum_preuzimanja'],
     'datum_povratka'=>$p['datum_povratka'],
     'korisnik'=>$p['korisnik'],
-    'osiguranje'=>$p['osiguranje'],
+    'osiguranje'=>$p['osiguranje'] ?? 0,
     'sifra'=>$p['sifra']
 ]);
 
-$veza->commit();
+//$veza->commit();
 
 }
 
