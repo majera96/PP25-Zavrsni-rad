@@ -83,7 +83,6 @@ class RezervacijaController extends AutorizacijaController
             'js'=>'<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
             <script>
                 let url=\'' .  App::config('url') .  '\';
-                let rezervacija=' . $e->sifra . ';
             </script>
             <script src="'. App::config('url') . 'public/js/detaljiGrupe.js"></script>
             '
