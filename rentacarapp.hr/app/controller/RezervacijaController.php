@@ -57,6 +57,7 @@ class RezervacijaController extends AutorizacijaController
     
         $entitet = Rezervacija::readOne($sifra);
 
+        if($this->kontrola()){
         if (!$entitet instanceof stdClass || $entitet->sifra != true) {
             header('location: ' . App::config('url') . 'rezervacija');
         }
@@ -67,6 +68,7 @@ class RezervacijaController extends AutorizacijaController
             header('location: ' . App::config('url') . 'rezervacija');
             return;
         }
+    }
 
         $this->detalji($entitet,$korisnici,$lokacije,$vozila,$this->poruka);
     }
@@ -91,23 +93,39 @@ class RezervacijaController extends AutorizacijaController
 
     private function kontrola()
     {
-        return $this->kontrolirajVozilo() && $this->kontrolirajLokaciju() && $this->kontrolirajOsiguranje();
+        return $this->kontrolirajVozilo() && $this->kontrolirajLokaciju() && $this->kontrolirajKorisnik();
     }
         
     private function kontrolirajVozilo()
-    {
-        return true;
-    }
+        {
+            $this->entitet->vozilo = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->vozilo))));
+    
+            if ($this->entitet->vozilo == '') {
+                $this->poruka = 'Vozilo je obavezano';
+                return false;
+            }
+            return true;
+        }
 
     private function kontrolirajLokaciju()
     {
+        $this->entitet->lokacija = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->lokacija))));
 
+        if ($this->entitet->lokacija == '') {
+            $this->poruka = 'Lokacija je obavezna';
+            return false;
+        }
         return true;
     }
 
-    private function kontrolirajOsiguranje()
+    private function kontrolirajKorisnik()
     {
+        $this->entitet->korisnik = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->korisnik))));
 
+        if ($this->entitet->korisnik == '') {
+            $this->poruka = 'Korisnik je obavezan';
+            return false;
+        }
         return true;
     }
 
