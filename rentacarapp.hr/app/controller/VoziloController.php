@@ -129,6 +129,14 @@ class VoziloController extends AutorizacijaController
         return true;
     }
 
+    public function trazi()
+    {
+        if(!isset($_GET['term'])){
+            return;
+        }
+        echo json_encode(Vozilo::search($_GET['term'],$_GET['rezervacija']));
+    }
+
     public function brisanje($sifra)
     {
         Vozilo::delete($sifra);

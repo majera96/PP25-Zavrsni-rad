@@ -2,6 +2,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php  echo App::config('nazivApp');?></title>
+    <?php if(isset($css)){echo $css;}?>
     <link rel="stylesheet" href="<?php echo App::config('url'); ?>public/css/foundation.css">
     <link rel="stylesheet" href="<?php echo App::config('url'); ?>public/css/app.css">
     <?php // Favicon ?>

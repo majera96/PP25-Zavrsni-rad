@@ -92,4 +92,24 @@ class Vozilo
             'sifra'=>$sifra
         ]);
     }
+
+    public static function search($uvjet, $rezervacija)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+            select a.sifra, a.vozilo,
+            b.proizvodac, b.model, b.godiste, 
+            b.mjenjac from 
+            rezervacija a inner join
+            vozilo b on a.vozilo =b.sifra 
+            where concat(b.proizvodac,\' \', b.model) like :uvjet
+            order by 4,3
+            limit 10
+        ');
+        $izraz->execute([
+            'uvjet' => '%' . $uvjet . '%',
+            'rezervacija' => $rezervacija
+        ]); 
+        return $izraz->fetchAll(); 
+    }
 }

@@ -122,4 +122,31 @@ $izraz->execute(
 
 }
 
+public static function dodajvozilo($vozilo)
+{
+    $veza = DB::getInstance();
+    $izraz = $veza->prepare('
+    
+       insert into rezervacija(vozilo) values
+       (:vozilo)
+    
+    ');
+    $izraz->execute([
+        'vozilo'=>$vozilo
+    ]);
+}
+
+public static function obrisivozilo($vozilo)
+{
+    $veza = DB::getInstance();
+    $izraz = $veza->prepare('
+    
+      delete from rezervacija where vozilo=:vozilo
+    
+    ');
+    $izraz->execute([
+        'vozilo'=>$vozilo
+    ]);
+}
+
 }

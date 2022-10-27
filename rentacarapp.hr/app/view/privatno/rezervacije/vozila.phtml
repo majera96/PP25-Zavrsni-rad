@@ -1,0 +1,30 @@
+<div class="callout" 
+ style="margin-top: 25px; height: 360px;">
+
+	<input id="uvjet" type="text" placeholder="Tražite po proizvođaču ili modelu vozila">
+
+    
+    <div style="overflow: auto; max-height: 280px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Vozilo</th>
+                    <th>Akcija</th>
+                </tr>
+            </thead>
+            <tbody id="podaci">
+                <?php foreach($e->vozila as $v): ?>
+                    <tr>
+                        <td><?=$v->proizvodac?> <?=$v->model?></td>
+                        <td>
+                            <a class="brisiVozilo" href="#" id="p_<?=$v->sifra?>">
+                                <i style="color: red;" 
+                                class="step fi-page-delete size-36"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
+    </div>
+</div>

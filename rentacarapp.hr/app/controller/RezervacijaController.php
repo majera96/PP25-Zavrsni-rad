@@ -78,7 +78,15 @@ class RezervacijaController extends AutorizacijaController
             'lokacije'=>$lokacije,
             'vozila'=>$vozila,
             'korisnici'=>$korisnici,
-            'poruka'=>$poruka
+            'poruka'=>$poruka,
+            'css'=>'<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">',
+            'js'=>'<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+            <script>
+                let url=\'' .  App::config('url') .  '\';
+                let rezervacija=' . $e->sifra . ';
+            </script>
+            <script src="'. App::config('url') . 'public/js/detaljiGrupe.js"></script>
+            '
         ]);
     }
 
@@ -125,7 +133,6 @@ class RezervacijaController extends AutorizacijaController
         $k->sifra = 0;
         $k->ime = 'Odaberi';
         $k->prezime = 'korisnika';
-        $k->broj_vozacke = '';
         $korisnici[] = $k;
         foreach(Korisnik::read() as $korisnik){
             $korisnici[]=$korisnik;
@@ -153,6 +160,22 @@ class RezervacijaController extends AutorizacijaController
     {
         Rezervacija::brisanje($sifra);
         header('location: ' . App::config('url') . 'rezervacija');
+    }
+
+    public function dodajvozilo()
+    {
+        if(!isset($_GET['rezervacija']) || !isset($_GET['vozilo'])){
+            return;
+        }
+        Rezervacija::dodajvozilo($_GET['rezervacija'],$_GET['vozilo']);
+    }
+
+    public function obrisivozilo()
+    {
+        if(!isset($_GET['rezervacija']) || !isset($_GET['vozilo'])){
+            return;
+        }
+        Rezervacija::obrisivozilo($_GET['rezervacija'],$_GET['vozilo']);
     }
 
 }
