@@ -12,7 +12,7 @@
                     echo ' selected=="selected"';
                 }
                 ?>
-                value="<?=$k->sifra?>"><?=$k->ime?> <?=$k->prezime?> <?=$k->broj_vozacke?></option>
+                value="<?=$k->sifra?>"><?=$k->ime?> <?=$k->prezime?></option>
             <?php endforeach; ?>
         </select>
 
@@ -41,7 +41,7 @@
         </select>
 
   <label>Cijena
-    <input type="text" name="cijena" value="<?=($e instanceof stdClass) ? $e->cijena : 0.5?>" />
+    <input type="text" name="cijena" value="<?=($e instanceof stdClass) ? $e->cijena : ''?>" />
   </label>
 
   <label>Datum preuzimanja
