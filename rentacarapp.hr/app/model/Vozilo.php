@@ -22,7 +22,10 @@ class Vozilo
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select * from vozilo where sifra=:sifra
+        select b.*, a.vozilo as slika
+        from slikavozila a right join vozilo b 
+        on a.vozilo=b.sifra
+        where b.sifra=:sifra;
         
         ');
         $izraz->execute([
@@ -37,7 +40,10 @@ class Vozilo
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select * from vozilo order by proizvodac
+        select b.* , a.vozilo as DodajSliku
+        from slikavozila a right join vozilo b 
+        on a.vozilo=b.sifra
+        order by 4,3
         
         ');
         $izraz->execute(); 

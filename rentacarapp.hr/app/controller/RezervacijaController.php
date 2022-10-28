@@ -57,7 +57,6 @@ class RezervacijaController extends AutorizacijaController
     
         $entitet = Rezervacija::readOne($sifra);
 
-        if($this->kontrola()){
         if (!$entitet instanceof stdClass || $entitet->sifra != true) {
             header('location: ' . App::config('url') . 'rezervacija');
         }
@@ -68,7 +67,7 @@ class RezervacijaController extends AutorizacijaController
             header('location: ' . App::config('url') . 'rezervacija');
             return;
         }
-    }
+    
 
         $this->detalji($entitet,$korisnici,$lokacije,$vozila,$this->poruka);
     }
@@ -85,13 +84,14 @@ class RezervacijaController extends AutorizacijaController
             'js'=>'<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
             <script>
                 let url=\'' .  App::config('url') .  '\';
+                let + vozilo;
             </script>
-            <script src="'. App::config('url') . 'public/js/detaljiGrupe.js"></script>
+            <script src="'. App::config('url') . 'public/js/detaljiVozila.js"></script>
             '
         ]);
     }
 
-    private function kontrola()
+    /*private function kontrola()
     {
         return $this->kontrolirajVozilo() && $this->kontrolirajLokaciju() && $this->kontrolirajKorisnik();
     }
@@ -128,6 +128,20 @@ class RezervacijaController extends AutorizacijaController
         }
         return true;
     }
+
+        private function kontrolaCijena()
+    {
+        $this->entitet->cijena = trim(str_replace(' ', '', (str_replace('&nbsp;', '', $this->entitet->cijena))));
+                
+            if($this->entitet->cijena<=0){
+                $this->poruka='Ako unosite cijenu, mora biti decimalni broj veći od 0, unijeli ste: ' 
+            . $this->entitet->cijena;
+            return false;
+            }
+            return true;
+        }
+
+    */
 
     private function ucitajVozila()
     {
