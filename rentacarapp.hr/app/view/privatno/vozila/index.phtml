@@ -1,7 +1,18 @@
-<a class="success button expanded" 
-    href="<?=App::config('url')?>vozilo/novi">
-        Dodaj novo vozilo
-</a>
+<div class="grid-x grid-padding-x" style="margin-top: 10px;">
+    <div class="large-10 cell">
+        <form action="<?=App::config('url')?>vozilo/index" method="get">
+            <input type="text" name="uvjet" 
+            placeholder="Unesite proizvođača ili model vozila"
+            value="" />
+        </form>
+    </div>
+    <div class="large-2 cell">
+        <a href="<?=App::config('url')?>vozilo/novi"
+            class="success button expanded">Dodaj novo vozilo</a>
+    </div>
+</div>
+
+
 
 <table>
     <thead>
@@ -31,5 +42,9 @@
                 </td>
             </tr>
         <?php endforeach; ?>
+
     </tbody>
+
 </table>
+
+<?php include 'stranicenje.phtml'; ?>

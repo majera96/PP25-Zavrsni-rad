@@ -7,6 +7,7 @@ if($dev){
         'dev'=>$dev,
         'url'=>'http://rentacarapp.hr/',
         'nazivApp'=>'Rent a car',
+        'rps'=>12,
         'baza'=>[
             'server'=>'localhost',
             'baza'=>'RentACar',
@@ -19,6 +20,7 @@ if($dev){
         'dev'=>$dev,
         'url'=>'https://polaznik02.edunova.hr/',
         'nazivApp'=>'Rent a car',
+        'rps'=>12,
         'baza'=>[
             'server'=>'localhost',
             'baza'=>'aurelije_rentacar',

@@ -3,6 +3,22 @@
 class Vozilo
 {
 
+    public static function ukupnoVozila($uvjet)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            select count(*) from vozilo 
+            where proizvodac like :uvjet
+      
+        
+        '); 
+        $uvjet = '%' . $uvjet . '%';
+        $izraz->bindParam('uvjet',$uvjet);
+        $izraz->execute();
+        return $izraz->fetchColumn();
+    }
+
     public static function brisanje($sifra)
     {
         $veza = DB::getInstance();
@@ -35,17 +51,26 @@ class Vozilo
     }
 
     // CRUD - R
-    public static function read()
+    public static function read($stranica,$uvjet)
     {
+
+        $rps = App::config('rps');
+        $od = $stranica * $rps - $rps;
+
+
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-        select b.* , a.vozilo as DodajSliku
-        from slikavozila a right join vozilo b 
-        on a.vozilo=b.sifra
-        order by 4,3
+        select * from vozilo
+        where proizvodac like :uvjet
+        order by 4,3 limit :od, :rps
         
         ');
+
+        $uvjet = '%' . $uvjet . '%';
+        $izraz->bindValue('od',$od,PDO::PARAM_INT);
+        $izraz->bindValue('rps',$rps,PDO::PARAM_INT);
+        $izraz->bindParam('uvjet',$uvjet);
         $izraz->execute(); 
         return $izraz->fetchAll();
     }
@@ -99,22 +124,18 @@ class Vozilo
         ]);
     }
 
-    public static function search($uvjet, $rezervacija)
+    public static function search($uvjet, $vozilo)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
-            select a.sifra, a.vozilo,
-            b.proizvodac, b.model, b.godiste, 
-            b.mjenjac from 
-            rezervacija a inner join
-            vozilo b on a.vozilo =b.sifra 
-            where concat(b.proizvodac,\' \', b.model) like :uvjet
+            select * from vozilo
+            where concat(proizvodac,\' \', model) like :uvjet
             order by 4,3
             limit 10
         ');
         $izraz->execute([
             'uvjet' => '%' . $uvjet . '%',
-            'rezervacija' => $rezervacija
+            'vozilo' => $vozilo
         ]); 
         return $izraz->fetchAll(); 
     }

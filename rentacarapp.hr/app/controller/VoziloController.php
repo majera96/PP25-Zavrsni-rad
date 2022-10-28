@@ -12,8 +12,41 @@ class VoziloController extends AutorizacijaController
 
     public function index()
     {
+
+        if(!isset($_GET['stranica'])){
+            $stranica=1;
+        }else{
+            $stranica=(int)$_GET['stranica'];
+        }
+        
+
+        if(!isset($_GET['uvjet'])){
+            $uvjet='';
+        }else{
+            $uvjet=$_GET['uvjet'];
+        }
+
+
+        $up = Vozilo::ukupnoVozila($uvjet);
+        $ukupnoStranica = ceil($up / App::config('rps'));
+        
+        if($stranica>$ukupnoStranica){
+            $stranica = 1;
+        }
+
+        if($stranica==0){
+            $stranica=$ukupnoStranica;
+        }
+
         $this->view->render($this->phtmlDir . 'index',[
-            'entiteti'=>Vozilo::read()
+            'entiteti'=>Vozilo::read(),
+            'uvjet'=>$uvjet,
+            'stranica' => $stranica,
+            'ukupnoStranica'=>$ukupnoStranica,
+            'js'=>'<script>
+            let url=\'' . App::config('url') . '\';
+            </script>
+            <script src="' . App::config('url') . 'public/js/indexVozila.js"></script>'
         ]);
     }
 
@@ -140,7 +173,10 @@ class VoziloController extends AutorizacijaController
     public function brisanje($sifra)
     {
         Vozilo::delete($sifra);
-        header('location: ' . App::config('url') . 'vozilo');
-    }
+        $uvjet = isset($_GET['uvjet']) ? $_GET['uvjet'] : '';
+        $stranica = isset($_GET['stranica']) ? $_GET['stranica'] : '';
+        header('location: ' . App::config('url') . 'vozilo?uvjet=' . $uvjet . '&stranica=' . $stranica);
+}
 
 }
+
