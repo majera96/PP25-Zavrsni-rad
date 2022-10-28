@@ -13,7 +13,7 @@ class VoziloController extends AutorizacijaController
     public function index()
     {
 
-        if(!isset($_GET['stranica'])){
+       /* if(!isset($_GET['stranica'])){
             $stranica=1;
         }else{
             $stranica=(int)$_GET['stranica'];
@@ -38,15 +38,16 @@ class VoziloController extends AutorizacijaController
             $stranica=$ukupnoStranica;
         }
 
+        */
         $this->view->render($this->phtmlDir . 'index',[
             'entiteti'=>Vozilo::read(),
-            'uvjet'=>$uvjet,
-            'stranica' => $stranica,
-            'ukupnoStranica'=>$ukupnoStranica,
-            'js'=>'<script>
-            let url=\'' . App::config('url') . '\';
-            </script>
-            <script src="' . App::config('url') . 'public/js/indexVozila.js"></script>'
+          //  'uvjet'=>$uvjet,
+            //'stranica' => $stranica,
+            //'ukupnoStranica'=>$ukupnoStranica,
+           // 'js'=>'<script>
+           // let url=\'' . App::config('url') . '\';
+           // </script>
+            // <script src="' . App::config('url') . 'public/js/indexVozila.js"></script>'
         ]);
     }
 
@@ -167,16 +168,17 @@ class VoziloController extends AutorizacijaController
         if(!isset($_GET['term'])){
             return;
         }
-        echo json_encode(Vozilo::search($_GET['term'],$_GET['rezervacija']));
+        echo json_encode(Vozilo::search($_GET['term']));
     }
 
     public function brisanje($sifra)
     {
         Vozilo::delete($sifra);
-        $uvjet = isset($_GET['uvjet']) ? $_GET['uvjet'] : '';
-        $stranica = isset($_GET['stranica']) ? $_GET['stranica'] : '';
-        header('location: ' . App::config('url') . 'vozilo?uvjet=' . $uvjet . '&stranica=' . $stranica);
-}
+       // $uvjet = isset($_GET['uvjet']) ? $_GET['uvjet'] : '';
+        //$stranica = isset($_GET['stranica']) ? $_GET['stranica'] : '';
+     //   header('location: ' . App::config('url') . 'vozilo?uvjet=' . $uvjet . '&stranica=' . $stranica);
+     header('location: ' . App::config('url') . 'vozilo');
+    }
 
 }
 

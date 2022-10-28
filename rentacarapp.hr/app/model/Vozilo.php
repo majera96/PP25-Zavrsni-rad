@@ -3,7 +3,7 @@
 class Vozilo
 {
 
-    public static function ukupnoVozila($uvjet)
+ /*   public static function ukupnoVozila($uvjet)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
@@ -17,7 +17,7 @@ class Vozilo
         $izraz->bindParam('uvjet',$uvjet);
         $izraz->execute();
         return $izraz->fetchColumn();
-    }
+    } */
 
     public static function brisanje($sifra)
     {
@@ -51,26 +51,27 @@ class Vozilo
     }
 
     // CRUD - R
-    public static function read($stranica,$uvjet)
+    public static function read()
     {
 
-        $rps = App::config('rps');
-        $od = $stranica * $rps - $rps;
+        //$rps = App::config('rps');
+        //$od = $stranica * $rps - $rps;
 
 
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-        select * from vozilo
-        where proizvodac like :uvjet
-        order by 4,3 limit :od, :rps
+        select b.* , a.vozilo as DodajSliku
+        from slikavozila a right join vozilo b 
+        on a.vozilo=b.sifra
+        order by 4,3
         
         ');
 
-        $uvjet = '%' . $uvjet . '%';
-        $izraz->bindValue('od',$od,PDO::PARAM_INT);
-        $izraz->bindValue('rps',$rps,PDO::PARAM_INT);
-        $izraz->bindParam('uvjet',$uvjet);
+        //$uvjet = '%' . $uvjet . '%';
+        //$izraz->bindValue('od',$od,PDO::PARAM_INT);
+        //$izraz->bindValue('rps',$rps,PDO::PARAM_INT);
+        //$izraz->bindParam('uvjet',$uvjet);
         $izraz->execute(); 
         return $izraz->fetchAll();
     }
@@ -124,7 +125,7 @@ class Vozilo
         ]);
     }
 
-    public static function search($uvjet, $vozilo)
+    /*public static function search($uvjet, $vozilo)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
@@ -138,5 +139,5 @@ class Vozilo
             'vozilo' => $vozilo
         ]); 
         return $izraz->fetchAll(); 
-    }
+    } */
 }
