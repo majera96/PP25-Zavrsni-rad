@@ -1,0 +1,52 @@
+<form method="post" 
+action="<?=App::config('url')?>korisnik/update/<?=$korisnik->korisnik?>">
+  <h4 class="text-center">Promjena korinika</h4>
+  <label>Ime
+    <input type="text" name="ime" value="<?=$korisnik->ime?>" />
+  </label>
+
+  <label>Prezime
+    <input type="text" name="prezime" value="<?=$korisnik->prezime?>" />
+  </label>
+
+  <label>Email
+    <input type="text" name="email" value="<?=$korisnik->email?>" />
+  </label>
+
+  <label>Broj mobitela
+    <input type="number" name="brojmobitela" value="<?=$korisnik->broj_mobitela?>" />
+  </label>
+
+  <label>Ime ulice
+    <input type="text" name="adresa" value="<?=$korisnik->ime_ulice?>" />
+  </label>
+
+  <label>Grad
+    <input type="text" name="grad" value="<?=$korisnik->grad?>" />
+  </label>
+
+  <label>Država
+    <input type="text" name="drzava" value="<?=$korisnik->drzava?>" />
+  </label>
+
+  <label>Broj vozačke
+    <input type="number" name="broj_vozacke" value="<?=$korisnik->broj_vozacke?>" />
+  </label>
+
+
+ 
+  </label>
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>korisnik">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <input type="submit" class="button expanded" value="Promjeni"></input>
+    </div>
+  </div>
+
+
+</form>

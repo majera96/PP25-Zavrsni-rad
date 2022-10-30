@@ -1,0 +1,53 @@
+<form method="post" 
+action="<?=App::config('url')?>korisnik/brisanje/<?=$korisnik->sifra?>">
+  <h4 class="text-center">Brisanje korisnika</h4>
+  <label>Ime
+    <input disabled="disabled" type="text" name="ime" value="<?=$korisnik->ime?>" />
+  </label>
+ 
+  <label>Prezime
+    <input disabled="disabled" type="text" name="prezime" value="<?=$korisnik->prezime?>" />
+  </label>
+
+  <label>Email
+    <input disabled="disabled" type="email" name="email" value="<?=$korisnik->email?>" />
+  </label>
+
+  <label>Broj mobitela
+    <input disabled="disabled" type="number" name="broj_mobitela" value="<?=$korisnik->broj_mobitela?>" />
+  </label>
+
+  <label>Ime ulice
+    <input disabled="disabled" type="text" name="ime_ulice" value="<?=$korisnik->ime_ulice?>" />
+  </label>
+
+  <label>Grad
+    <input disabled="disabled" type="text" name="grad" value="<?=$korisnik->grad?>" />
+  </label>
+
+  <label>Država
+    <input disabled="disabled" type="text" name="drzava" value="<?=$korisnik->drzava?>" />
+  </label>
+
+  <label>Broj vozačke
+    <input disabled="disabled" type="number" name="broj_vozacke" value="<?=$korisnik->broj_vozacke?>" />
+  </label>
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>korisnik">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <?php if($brisanje): ?>
+            <input type="hidden" name="obrisi" value="true" />
+            <input type="submit" class="button expanded" value="Obriši"></input>
+        <?php else: ?>
+            Korisnik se ne može obrisati
+        <?php endif;?>
+    </div>
+  </div>
+
+
+</form>

@@ -153,7 +153,7 @@ class VoziloController extends AutorizacijaController
 
     private function kontrolirajOpis()
     {
-        $this->entitet->opis=trim(str_replace('&nbsp;', '', $this->entiter->opis));
+        $this->entitet->opis=trim(str_replace('&nbsp;', '', $this->entitet->opis));
 
         if(strlen(($this->entitet->opis))>100) {
             $this->poruka = 'Maksimalno unjeti 100 znakova';
@@ -179,6 +179,22 @@ class VoziloController extends AutorizacijaController
      //   header('location: ' . App::config('url') . 'vozilo?uvjet=' . $uvjet . '&stranica=' . $stranica);
      header('location: ' . App::config('url') . 'vozilo');
     }
+
+    public function spremisliku(){
+
+        $slika = $_POST['slika'];
+        $slika=str_replace('data:image/png;base64,','',$slika);
+        $slika=str_replace(' ','+',$slika);
+        $data=base64_decode($slika);
+
+        file_put_contents(BP . 'public' . DIRECTORY_SEPARATOR
+        . 'img' . DIRECTORY_SEPARATOR . 
+        'vozila' . DIRECTORY_SEPARATOR 
+        . $_POST['id'] . '.png', $data);
+
+        echo "OK";
+    }
+
 
 }
 

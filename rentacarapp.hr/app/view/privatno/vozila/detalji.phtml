@@ -12,20 +12,34 @@ action="<?=App::config('url')?>vozilo/promjena/<?=$e->sifra?>">
   </label>
 
   <label>Godište vozila
-    <input type="date" name="godiste" value="<?=$e->godiste?>" />
+    <input type="number" name="godiste" value="<?=$e->godiste?>" />
   </label>
 
-  <label>Mjenjač
-    <input type="text" name="mjenjac" value="<?=$e->mjenjac?>" />
-  </label>
+  <label for="mjenjac" name="mjenjac" value="<?=$e->mjenjac?>">Mjenjač:</label>
+<select id="mjenjac" name="mjenjac">
+  <option label="Automatski">Automatski</option>
+  <option label="Mehanički">Mehanički</option>
+</select>
 
-  <label>Gorivo
-    <input type="text" name="gorivo" value="<?=$e->gorivo?>" />
-  </label>
+
+  <label for="gorivo" name="gorivo" value="<?=$e->gorivo?>">Gorivo:</label>
+<select id="gorivo" name="gorivo">
+  <option label="Dizel">Dizel</option>
+  <option label="Benzin">Benzin</option>
+  <option label="Hibrid">Hibrid</option>
+  <option label="Baterija">Baterija</option>
+</select>
 
   <label>Opis vozila
     <input type="text" name="opis" value="<?=$e->opis?>" />
   </label>
+
+ <!-- <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">  
+  <a href="#" id="spremi">Spremi</a>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div> -->
 
   <?=$poruka?>
 

@@ -140,4 +140,32 @@ class Vozilo
         ]); 
         return $izraz->fetchAll(); 
     } */
+
+  /*  public static function dodajvozilo($vozilo)
+{
+    $veza = DB::getInstance();
+    $izraz = $veza->prepare('
+    
+    insert into 
+    vozilo(proizvodac,model,godiste,gorivo,mjenjac,opis)
+    values (:proizvodac,:model,:godiste,:gorivo,:mjenjac,:opis)
+    
+    ');
+    $izraz->execute([
+        'vozilo'=>$vozilo
+    ]);
+}
+
+public static function obrisivozilo($vozilo)
+{
+    $veza = DB::getInstance();
+    $izraz = $veza->prepare('
+    
+    delete from vozilo where sifra=:sifra
+    
+    ');
+    $izraz->execute([
+        'vozilo'=>$vozilo
+    ]);
+} */
 }
