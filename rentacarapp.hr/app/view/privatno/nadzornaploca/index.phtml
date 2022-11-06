@@ -1,0 +1,45 @@
+<p class="lead text-center mt-5 mb-2">Operateri</p>
+    <div class="mb-5">
+        <?php if ($trenutniOperater->uloga == 'administrator') : ?>
+            <div class="d-grid gap-2 mb-2">
+                <a href="<?= App::config('url') ?>nadzornaploca/novi/" class="btn btn-primary">Novi operater</a>
+            </div>
+        <?php endif; ?>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Ime</th>
+                    <th scope="col">Prezime</th>
+                    <th scope="col">Uloga</th>
+                    <?php if ($trenutniOperater->uloga == 'administrator') : ?>
+                        <th scope="col">Akcija</th>
+                    <?php endif; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($operateri as $o) : ?>
+                    <tr>
+                        <td><?= $o->email ?></td>
+                        <td><?= $o->ime ?></td>
+                        <td><?= $o->prezime ?></td>
+                        <td><?= ucfirst($o->uloga) ?></td>
+                        <?php if ($trenutniOperater->uloga == 'administrator') : ?>
+                            <td>
+                                <div class="btn-group dropstart d-flex justify-content-center">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                                        . . .
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="<?= App::config('url') ?>nadzornaploca/izmjenaoperatera/<?= $o->sifra ?>">Uredi</a></li>
+                                        <li><a class="dropdown-item" href="<?= App::config('url') ?>nadzornaploca/brisanjeoperatera/<?= $o->sifra ?>" onclick="return confirm('Sigurno želite obrisati operatera <?= $o->ime . ' ' . $o->prezime ?>?');">Obriši</a>
+                                    </ul>
+                                </div>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

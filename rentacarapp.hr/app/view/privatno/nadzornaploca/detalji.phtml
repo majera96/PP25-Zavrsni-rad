@@ -1,0 +1,51 @@
+<div class="m-2">
+    <div class="container w-50 p-3">
+        <?php if (!$noviunos) : ?>
+            <form class="container-fluid" method="post" action="<?= App::config('url') ?>nadzornaploca/izmjenaoperatera/<?= $operateri->sifra ?>">
+            <?php else : ?>
+                <form class="container-fluid" method="post" action="<?= App::config('url') ?>nadzornaploca/novi">
+                <?php endif; ?>
+                <div class="mb-3">
+                    <label for="ime" class="form-label">Ime</label>
+                    <input type="text" class="form-control" name="ime" id="ime" maxlength="50" value="<?= isset($_POST["ime"]) ? $_POST["ime"] : $operateri->ime; ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="prezime" class="form-label">Prezime</label>
+                    <input type="text" class="form-control" name="prezime" id="prezime" maxlength="50" value="<?= isset($_POST["prezime"]) ? $_POST["prezime"] : $operateri->prezime; ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="text" class="form-control" name="email" id="email" maxlength="50" value="<?= isset($_POST["email"]) ? $_POST["email"] : $operateri->email; ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="lozinka" class="form-label">Lozinka</label>
+                    <input type="password" class="form-control" name="lozinka" id="lozinka" placeholder="Lozinka mora sadržavati najmanje 8 znakova, jedno veliko slovo i jedan broj">
+                </div>
+                <div class="mb-3">
+                    <label for="ponoviLozinku" class="form-label">Ponovi lozinku</label>
+                    <input type="password" class="form-control" name="ponoviLozinku" id="ponovilozinku">
+                </div>
+                <div class="mb-3">
+                    <label for="uloga" class="form-label">Uloga</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="uloga" id="administrator" value="administrator" <?= isset($_POST['uloga']) && $_POST['uloga'] == 'administrator' || isset($operateri->uloga) &&  $operateri->uloga == 'administrator' ? 'checked' : '' ?>>
+                        <label class="form-check-label" for="administrator">
+                            Administrator
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="uloga" id="operater" value="operater" <?= isset($_POST['uloga']) && $_POST['uloga'] == 'operater' || isset($operateri->uloga) && $operateri->uloga == 'operater' ? 'checked' : '' ?>>
+                        <label class="form-check-label" for="operater">
+                            Operater
+                        </label>
+                    </div>
+                </div>
+                <p class="lead"><?= $poruka ?></p>
+                <br>
+                <div class="mb-5">
+                    <input type="submit" class="btn btn-success" value="Unesi"></input>
+                    <a href="<?= App::config('url') ?>nadzornaploca/" class="btn btn-danger">Odustani</a>
+                </div>
+                </form>
+    </div>
+</div>
