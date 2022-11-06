@@ -53,48 +53,60 @@ class VoziloController extends AutorizacijaController
 
     public function novi()
     {
-        $novaVozila = Vozilo::create([
-            'proizvodac'=>'',
-            'model'=>'',
-            'godiste'=>'',
-            'gorivo'=>'',
-            'mjenjac'=>'',
-            'opis'=>''
-        ]);
         header('location: ' . App::config('url') 
-                . 'vozilo/promjena/' . $novaVozila);
+                . 'vozilo/promjena/');
     }
+
     
-    public function promjena($sifra)
+    public function promjena($sifra = false)
     {
-        if(!isset($_POST['proizvodac'])){
 
-            $e = Vozilo::readOne($sifra);
-            if($e==null){
-                header('location: ' . App::config('url') . 'vozilo');
-            }
+        if (isset($_POST['nova']) && $_POST['nova'] === '1' ) {
+            Vozilo::create($_POST);
+            header('location: ' . App::config('url') . 'vozila');
+            return;
+        }
 
-            $this->view->render($this->phtmlDir . 'detalji',[
-                'e' => $e,
-                'poruka' => 'Unesite podatke'
-            ]);
+        if(!$sifra){
+            //prazna forma
+            $this->detalji(false,'Unesite podatke');
             return;
         }
 
         $this->entitet = (object) $_POST;
         $this->entitet->sifra=$sifra;
-    
+        
+        /*
         if($this->kontrola()){
-            Vozilo::update((array)$this->entitet);
-            header('location: ' . App::config('url') . 'vozilo');
+            Rezervacija::update((array)$this->entitet);
+            header('location: ' . App::config('url') . 'vozila');
             return;
         }
+        */
+    
+        $entitet = Vozilo::readOne($sifra);
 
-        $this->view->render($this->phtmlDir . 'detalji',[
-            'e'=>$this->entitet,
-            'poruka'=>$this->poruka
+        if (!$entitet instanceof stdClass || $entitet->sifra != true) {
+            header('location: ' . App::config('url') . 'vozila');
+        }
+
+        if (isset($_POST['nova']) && $_POST['nova'] === '0' ) {
+            $_POST['sifra'] = $sifra;
+            Vozilo::update($_POST);
+            header('location: ' . App::config('url') . 'vozila');
+            return;
+        }
+    
+
+        $this->detalji($entitet,$this->poruka);
+    }
+
+    private function detalji($e,$poruka)
+    {
+        $this->view->render($this->phtmlDir . 'detalji', [
+            'e'=>$e,
+            'poruka'=>$poruka,
         ]);
-
     }
 
     private function kontrola()

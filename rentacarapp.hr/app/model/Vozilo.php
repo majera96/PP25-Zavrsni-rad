@@ -95,8 +95,11 @@ class Vozilo
     // CRUD - U
     public static function update($vozilo)
     {
+
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
+
+        
         
             update vozilo set
                 proizvodac=:proizvodac,

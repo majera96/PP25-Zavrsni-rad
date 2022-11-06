@@ -1,28 +1,32 @@
+<?php
+    $sifra = $e ? $e->sifra : ''; 
+?>
+
 <form method="post" 
 action="<?=App::config('url')?>vozilo/promjena/<?=$e->sifra?>">
   <h4 class="text-center">Informacije o vozilima</h4>
   
   
   <label>Proizvođač vozila
-    <input type="text" name="proizvodac" value="<?=$e->proizvodac?>" />
+    <input type="text" name="proizvodac" value="<?=($e instanceof stdClass) ? $e->proizvodac : ''?>" />
   </label>
 
   <label>Model vozila
-    <input type="text" name="model" value="<?=$e->model?>" />
+    <input type="text" name="model" value="<?=($e instanceof stdClass) ? $e->model : ''?>" />
   </label>
 
   <label>Godište vozila
-    <input type="number" name="godiste" value="<?=$e->godiste?>" />
+    <input type="number" name="godiste" value="<?=($e instanceof stdClass) ? $e->godiste : ''?>" />
   </label>
 
-  <label for="mjenjac" name="mjenjac" value="<?=$e->mjenjac?>">Mjenjač:</label>
+  <label for="mjenjac" name="mjenjac" value="<?=($e instanceof stdClass) ? $e->mjenjac : ''?>">Mjenjač:</label>
 <select id="mjenjac" name="mjenjac">
   <option label="Automatski">Automatski</option>
   <option label="Mehanički">Mehanički</option>
 </select>
 
 
-  <label for="gorivo" name="gorivo" value="<?=$e->gorivo?>">Gorivo:</label>
+  <label for="gorivo" name="gorivo" value="<?=($e instanceof stdClass) ? $e->gorivo : ''?>">Gorivo:</label>
 <select id="gorivo" name="gorivo">
   <option label="Dizel">Dizel</option>
   <option label="Benzin">Benzin</option>
@@ -31,8 +35,11 @@ action="<?=App::config('url')?>vozilo/promjena/<?=$e->sifra?>">
 </select>
 
   <label>Opis vozila
-    <input type="text" name="opis" value="<?=$e->opis?>" />
+    <input type="text" name="opis" value="<?=($e instanceof stdClass) ? $e->opis : ''?>" />
   </label>
+
+  <input type="hidden" name="nova" value="<?=($e instanceof stdClass) ? 0 : 1 ?>" />
+
 
  <!-- <input type="file" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">  
   <a href="#" id="spremi">Spremi</a>
