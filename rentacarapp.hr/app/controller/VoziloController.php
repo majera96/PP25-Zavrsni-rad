@@ -61,7 +61,7 @@ class VoziloController extends AutorizacijaController
     public function promjena($sifra = false)
     {
 
-        if (isset($_POST['nova']) && $_POST['nova'] === '1' ) {
+        if (isset($_POST['novi']) && $_POST['novi'] === '1' ) {
             Vozilo::create($_POST);
             header('location: ' . App::config('url') . 'vozila');
             return;
